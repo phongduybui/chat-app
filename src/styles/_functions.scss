@@ -1,0 +1,4 @@
+// Base spacing: 8px
+@function spacing($spacing: 1) {
+  @return $spacing * 8px;
+}
