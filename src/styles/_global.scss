@@ -1,0 +1,16 @@
+* {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; //1rem = 10px
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}

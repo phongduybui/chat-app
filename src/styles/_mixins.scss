@@ -1,6 +1,37 @@
-@mixin flexCenter($direction: 'row') {
+@mixin flexCenter($direction: row) {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: $direction;
+}
+
+@mixin flex(
+  $flexDirection: row,
+  $justifyContent: flex-start,
+  $alignItems: flex-start,
+  $flexWrap: nowrap
+) {
+  display: flex;
+  flex-direction: $flexDirection;
+  flex-wrap: $flexWrap;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin breakpointDown($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin breakpointUp($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin breakpointBetween($breakpointUp, $breakpointDown) {
+  @media screen and (min-width: $breakpointUp) and (max-width: $breakpointDown) {
+    @content;
+  }
 }

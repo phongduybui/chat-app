@@ -1,8 +1,23 @@
+// Reset css
+@import './vendors/normalize.css';
+
+// Global customize css
 @import './global';
+
+// Contain global variables
 @import './variables';
+
+// Contain all scss mixins
 @import './mixins';
+
+// Contain all scss function
 @import './functions';
+
+// Typography
 @import './typography';
+
+// Animation
 @import './animations';
 
+// Style for components
 @import './components';
