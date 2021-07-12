@@ -38,15 +38,32 @@
       }
     }
     &__link {
+      position: relative;
       display: block;
       color: var(--gray-bold);
       padding: spacing(1.5);
       margin: spacing(0.5) spacing(1);
 
+      &.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -12px;
+        bottom: 0;
+        border-right: 3px solid var(--primary-color);
+      }
+
+      @include breakpointDown($sm) {
+        &.active::before {
+          display: none;
+        }
+      }
+
+      &.active,
       &:hover {
         color: var(--primary-color);
         background-color: var(--primary-color-background);
-        border-radius: 8px;
+        border-radius: $btn-border-radius;
       }
 
       & > svg {
