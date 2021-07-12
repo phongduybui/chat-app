@@ -1,0 +1,9 @@
+.App {
+  main {
+    margin-left: $sidebar-width;
+    min-height: 100vh;
+    & > div {
+      height: 100vh;
+    }
+  }
+}
