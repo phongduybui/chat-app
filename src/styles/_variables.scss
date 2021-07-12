@@ -5,12 +5,15 @@
   --background-color: #fff;
   --gray-soft: #f0f1f3;
   --gray-bold: #9da5b0;
+  --gray-border: #ddd;
 }
 
 /* ------------------------------------------------------- */
 
-/* Spacing */
-$sidebar-width: 64px;
+/* App */
+$sidebar-width: 68px;
+$btn-border-radius: 10px;
+$collapsible-bar-width: 280px;
 
 /* ------------------------------------------------------- */
 
