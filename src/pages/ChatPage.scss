@@ -1,0 +1,58 @@
+.ChatPage {
+  @include flex('row', 'flex-start', 'flex-start', 'nowrap');
+
+  &__user {
+    padding: spacing(2);
+
+    .user {
+      @include flexCenter(column);
+
+      > * {
+        margin-bottom: spacing(1.5);
+      }
+
+      &__state {
+        background: var(--primary-color-background);
+        border: none;
+        outline: transparent;
+        font-size: 14px;
+        color: var(--primary-color);
+        padding: 5px 10px;
+        border-radius: 8px;
+      }
+
+      &__last-chats {
+        margin: spacing(1) 0;
+        .title {
+          @include flex(row, space-between, center);
+
+          > span {
+            font-size: 16px;
+            color: var(--gray-bold);
+          }
+
+          > button {
+            @include flexCenter();
+            background-color: var(--primary-color-background);
+            color: var(--primary-color);
+            padding: 8px;
+            border-radius: $btn-border-radius;
+          }
+        }
+
+        .list-chat {
+          margin: 16px 0;
+        }
+      }
+    }
+  }
+
+  &__chat-box {
+    flex-grow: 1;
+  }
+
+  &__shared-files .CollapsibleBar__title > span {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+}
