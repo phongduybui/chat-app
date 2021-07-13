@@ -15,9 +15,10 @@
 
   &__btn {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     right: 16px;
-    bottom: 0;
+    @include flexCenter();
     font-size: 18px;
     color: var(--gray-bold);
   }

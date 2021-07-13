@@ -16,7 +16,7 @@
   }
 
   & .brand {
-    margin-top: spacing(2);
+    margin-top: spacing(3);
     @include flexCenter(row);
     @include breakpointDown($sm) {
       display: none;

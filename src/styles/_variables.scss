@@ -1,11 +1,14 @@
 /* Colors */
 :root {
-  --primary-color: #56a48a;
-  --primary-color-background: rgb(86, 164, 138, 0.1);
+  --primary-color: #4a8f80;
+  --primary-color-bold: #447565;
+  --primary-color-background: #e0f4f1;
   --background-color: #fff;
+  --background-color-light: #edf0f5;
   --gray-soft: #f0f1f3;
   --gray-bold: #9da5b0;
   --gray-border: #ddd;
+  --text-black: #101b39;
 }
 
 /* ------------------------------------------------------- */
@@ -14,6 +17,7 @@
 $sidebar-width: 68px;
 $btn-border-radius: 10px;
 $collapsible-bar-width: 280px;
+$collapsible-bar-title-height: 52px;
 
 /* ------------------------------------------------------- */
 

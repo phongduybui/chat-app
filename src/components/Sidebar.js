@@ -41,14 +41,14 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item'>
-          <button className='nav__link'>
-            <BiMoon />
-          </button>
-        </li>
-        <li className='nav__item'>
           <NavLink to='/setting' className='nav__link'>
             <BiCog />
           </NavLink>
+        </li>
+        <li className='nav__item'>
+          <button className='nav__link'>
+            <BiMoon />
+          </button>
         </li>
       </ul>
       <div className='user'>

@@ -18,6 +18,20 @@
   align-items: $alignItems;
 }
 
+@mixin textOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin textClamp($lineClamp: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lineClamp;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @mixin breakpointDown($breakpoint) {
   @media screen and (max-width: $breakpoint) {
     @content;
