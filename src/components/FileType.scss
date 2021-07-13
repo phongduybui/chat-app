@@ -1,0 +1,37 @@
+.FileType {
+  @include flex(row, space-between, center);
+  padding: spacing(1) 0;
+
+  &__icon {
+    @include flexCenter();
+    position: relative;
+    font-size: 16px;
+    padding: 10px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: currentColor;
+      border-radius: 8px;
+      opacity: 0.15;
+    }
+  }
+
+  &__wrapper {
+    flex-grow: 1;
+    margin-left: spacing(1.5);
+  }
+
+  &__info {
+    margin-bottom: 0;
+    margin-top: spacing(0.5);
+  }
+
+  &__btn-expand {
+    font-size: 20px;
+  }
+}
