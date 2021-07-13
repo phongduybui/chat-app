@@ -1,0 +1,34 @@
+.CollapsibleBar {
+  width: $collapsible-bar-width;
+  padding: spacing(2);
+  transition: all 0.4s;
+
+  &.collapse {
+    width: 68px;
+    & .CollapsibleBar__title {
+      > span {
+        display: none;
+      }
+    }
+  }
+
+  &__title {
+    @include flexCenter(row);
+    justify-content: flex-start;
+    padding-bottom: spacing(2);
+    margin-bottom: spacing(2);
+    border-bottom: 1px solid var(--gray-border);
+
+    > button {
+      padding: spacing(1);
+      border-radius: 8px;
+      background-color: var(--gray-soft);
+      margin-right: spacing(1.5);
+
+      > svg {
+        font-size: 18px;
+        color: var(--gray-bold);
+      }
+    }
+  }
+}

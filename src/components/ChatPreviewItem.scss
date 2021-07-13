@@ -1,0 +1,24 @@
+.ChatPreviewItem {
+  @include flex(row);
+  padding: 8px;
+
+  &__wrapper {
+    margin-left: spacing(1.5);
+    flex-grow: 1;
+  }
+
+  &__info {
+    @include flex(row, space-between);
+    .user-name {
+      margin-right: auto;
+    }
+  }
+
+  &__latest-message {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: spacing(0.5);
+  }
+}

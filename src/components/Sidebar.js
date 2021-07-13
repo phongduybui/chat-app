@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/icons/logo.svg';
 import {
@@ -9,6 +9,7 @@ import {
   BiMoon,
   BiCog,
 } from 'react-icons/bi';
+import Avatar from './Avatar';
 
 const Sidebar = () => {
   return (
@@ -20,7 +21,7 @@ const Sidebar = () => {
       </div>
       <ul className='nav'>
         <li className='nav__item'>
-          <NavLink to='/chats' className='nav__link'>
+          <NavLink exact to='/' className='nav__link'>
             <BiChat />
           </NavLink>
         </li>
@@ -51,11 +52,10 @@ const Sidebar = () => {
         </li>
       </ul>
       <div className='user'>
-        <img
-          className='user__avatar'
-          alt=''
+        <Avatar
+          size={36}
           src={`https://ui-avatars.com/api/?background=random&color=fff&name=DP`}
-        ></img>
+        />
       </div>
     </aside>
   );
