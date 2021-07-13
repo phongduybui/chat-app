@@ -1,6 +1,9 @@
 // Reset css
 @import './vendors/normalize.css';
 
+// Typography and font-face
+@import './typography';
+
 // Global customize css
 @import './global';
 
@@ -12,9 +15,6 @@
 
 // Contain all scss function
 @import './functions';
-
-// Typography
-@import './typography';
 
 // Animation
 @import './animations';
