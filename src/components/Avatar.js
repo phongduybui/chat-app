@@ -1,18 +1,29 @@
 import React from 'react';
+import clsx from 'clsx';
 
-const Avatar = ({ src, size }) => {
+const Avatar = ({ src, size, hasBorder, hasState }) => {
   return (
-    <img
-      src={src}
-      alt=''
-      className='Avatar'
+    <div
+      className={clsx(
+        'Avatar__wrapper',
+        hasBorder && 'Avatar__has-border',
+        hasState && 'Avatar__has-state'
+      )}
       style={{
         width: size,
         height: size,
-        borderRadius: '50%',
-        objectFit: 'cover',
       }}
-    />
+    >
+      <img
+        src={src}
+        alt=''
+        className='Avatar'
+        style={{
+          width: size,
+          height: size,
+        }}
+      />
+    </div>
   );
 };
 
