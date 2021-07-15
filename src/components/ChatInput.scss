@@ -1,0 +1,59 @@
+.ChatInput {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 16px 30px;
+
+  input {
+    padding: 18px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 300;
+    border-radius: 12px;
+    border: transparent;
+    outline-color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+    &::placeholder {
+      color: var(--gray-bold);
+      font-weight: 400;
+      font-size: 15px;
+    }
+  }
+
+  &__action-group {
+    position: absolute;
+    right: 46px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    display: flex;
+
+    .btn {
+      @include flexCenter();
+      padding: 8px;
+    }
+
+    .btn__secondary {
+      color: var(--gray-bold);
+    }
+    .btn__send {
+      color: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      background-color: var(--primary-color);
+      margin-left: 8px;
+    }
+  }
+
+  .Picker {
+    position: absolute;
+    right: 28px;
+    bottom: 80px;
+
+    .emoji-mart {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      border-radius: 12px;
+    }
+  }
+}
