@@ -1,0 +1,53 @@
+.Message {
+  @include flex(row, flex-start, flex-end);
+
+  & + & {
+    margin-top: 32px;
+  }
+
+  &__list {
+    max-width: 60%;
+  }
+
+  &__content {
+    position: relative;
+    background-color: #fff;
+    padding: 14px 18px;
+    font-size: 15px;
+    border-radius: 12px;
+    margin-left: 16px;
+    width: 100%;
+    color: #000;
+    font-weight: 300;
+    line-height: 23px;
+
+    & + & {
+      margin-top: 8px;
+    }
+
+    &--first {
+      $triangle-width: 10px;
+      border-bottom-left-radius: unset;
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -$triangle-width;
+        border-bottom: 12px solid #fff;
+        border-left: $triangle-width solid transparent;
+      }
+
+      &--author {
+        border-bottom-right-radius: unset;
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          right: -$triangle-width;
+          border-bottom: 12px solid #fff;
+          border-right: $triangle-width solid transparent;
+        }
+      }
+    }
+  }
+}
