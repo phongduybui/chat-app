@@ -4,6 +4,60 @@
   &__user {
     padding: spacing(2);
 
+    // Style apply to child when bar collapse
+    &.collapse {
+      & .CollapsibleBar__content {
+        transition: all 0.2s;
+        .user {
+          .Avatar__wrapper,
+          .Avatar {
+            transition: all 0.2s;
+            width: 35px !important;
+            height: 35px !important;
+          }
+          &__name {
+            display: none;
+          }
+          &__state {
+            display: none;
+          }
+        }
+        .SearchBox {
+          display: none;
+        }
+        .user__last-chats {
+          margin-top: 0;
+          .title {
+            display: none;
+          }
+          .list-chat {
+            transition: all 0.2s;
+            border-top: 1px solid #ddd;
+            padding-top: 4px;
+            margin-top: 8px;
+          }
+          .ChatPreviewItem {
+            transition: all 0.2s;
+            padding: 10px 0px;
+          }
+        }
+      }
+    }
+
+    // Trick for show child div scrollable (css apply to parent)
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    // Trick for show child div scrollable (css apply to child)
+    & .CollapsibleBar__content {
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
     .user {
       @include flexCenter(column);
 
@@ -27,7 +81,7 @@
           @include flex(row, space-between, center);
 
           > span {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--gray-bold);
           }
 
@@ -35,7 +89,7 @@
             @include flexCenter();
             background-color: var(--primary-color-background);
             color: var(--primary-color);
-            padding: 8px;
+            padding: 6px;
             border-radius: $btn-border-radius;
           }
         }
@@ -51,8 +105,105 @@
     flex-grow: 1;
   }
 
-  &__shared-files .CollapsibleBar__title > span {
-    font-size: 16px;
-    white-space: nowrap;
+  &__shared-files {
+    .user {
+      @include flexCenter(column);
+
+      > * {
+        margin-bottom: spacing(1.5);
+      }
+    }
+
+    .type {
+      @include flex(row, space-between);
+      color: var(--primary-color);
+
+      svg {
+        font-size: 26px;
+        margin-bottom: 4px;
+      }
+
+      &__wrapper {
+        @include flex(row, flex-start, flex-end);
+        cursor: pointer;
+        background-color: var(--primary-color-background);
+        padding: 18px 16px;
+        border-radius: 12px;
+      }
+
+      &__info {
+        @include flex(column, center);
+        margin-left: 12px;
+      }
+
+      &__title {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      &__qty {
+        font-size: 24px;
+        color: var(--primary-color-bold);
+        font-weight: 600;
+      }
+    }
+
+    .file-title {
+      @include flex(row, space-between, center);
+      color: var(--gray-bold);
+      margin: spacing(3) 0 spacing(2);
+
+      > span {
+        font-size: 14px;
+      }
+
+      > button {
+        @include flexCenter();
+        color: var(--gray-bold);
+      }
+    }
+
+    &.collapse {
+      & .CollapsibleBar__content {
+        .user {
+          .Avatar__wrapper,
+          .Avatar {
+            width: 35px !important;
+            height: 35px !important;
+            transition: all 0.3s;
+          }
+          &__name {
+            display: none;
+          }
+          .text-secondary {
+            display: none;
+          }
+        }
+        .file-title {
+          transition: all 0.3s;
+          justify-content: center;
+          > button {
+            display: none;
+          }
+        }
+        .type {
+          display: none;
+        }
+        .FileType {
+          &__wrapper {
+            display: none;
+          }
+          &__btn-expand {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .CollapsibleBar__title > span {
+      font-size: 16px;
+      white-space: nowrap;
+    }
   }
 }
