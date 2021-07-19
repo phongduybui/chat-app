@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "clsx": "^1.1.1",
+    "date-fns": "^2.22.1",
     "emoji-mart": "^3.0.1",
     "firebase": "^8.7.1",
     "node-sass": "^6.0.1",
