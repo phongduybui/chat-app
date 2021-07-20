@@ -1,0 +1,55 @@
+.AddRoomModal {
+  background: white;
+  width: 400px;
+
+  .content {
+    padding: 32px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+
+    > * {
+      width: 100%;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    label {
+      margin-bottom: 8px;
+      font-weight: 300;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 8px;
+      font-weight: 300;
+      font-size: 14px;
+      outline-color: var(--primary-color);
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: 13px;
+  }
+
+  .action {
+    @include flex(row, flex-end, center);
+    padding: 16px 0;
+
+    > button {
+      font-size: 14px;
+    }
+
+    .btn-cancel {
+      padding: 8px 12px;
+      border: 1px solid #d5d5d5;
+    }
+    .btn-ok {
+      padding: 8px 12px;
+      background-color: var(--primary-color);
+      color: #fff;
+      margin-left: 8px;
+      border: 1px solid var(--primary-color);
+    }
+  }
+}
