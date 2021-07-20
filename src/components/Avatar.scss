@@ -22,30 +22,44 @@
   z-index: -1;
 }
 
-.Avatar__has-state::before {
-  content: '';
-  position: absolute;
-  right: 14%;
-  bottom: 14%;
-  transform: scale(1) translate(50%, 50%);
-  transform-origin: 100% 100%;
-  width: 8px;
-  height: 8px;
-  background-color: #68c3a6;
-  border-radius: 50%;
-  z-index: 10;
-}
+.Avatar__has-state {
+  &::before {
+    content: '';
+    position: absolute;
+    right: 14%;
+    bottom: 14%;
+    transform: scale(1) translate(50%, 50%);
+    transform-origin: 100% 100%;
+    width: 8px;
+    height: 8px;
+    background-color: #68c3a6;
+    border-radius: 50%;
+    z-index: 10;
+  }
 
-.Avatar__has-state::after {
-  content: '';
-  position: absolute;
-  right: 14%;
-  bottom: 14%;
-  transform: scale(1) translate(50%, 50%);
-  transform-origin: 100% 100%;
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  border-radius: 50%;
-  z-index: 2;
+  &::after {
+    content: '';
+    position: absolute;
+    right: 14%;
+    bottom: 14%;
+    transform: scale(1) translate(50%, 50%);
+    transform-origin: 100% 100%;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  &--available::before {
+    background-color: #68c3a6;
+  }
+
+  &--offline::before {
+    background-color: rgb(177, 173, 173);
+  }
+
+  &--busy::before {
+    background-color: orange;
+  }
 }

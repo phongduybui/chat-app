@@ -1,0 +1,23 @@
+.AvatarGroup {
+  @include flex(row, flex-start, center);
+  .Avatar__wrapper {
+    &:nth-child(2) {
+      position: relative;
+      left: -13px;
+      z-index: 2;
+    }
+  }
+
+  .extra-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #ddd;
+    position: relative;
+    left: -26px;
+    z-index: 1;
+    font-size: 32px;
+    color: #fff;
+    @include flexCenter();
+  }
+}
