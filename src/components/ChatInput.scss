@@ -1,8 +1,7 @@
 .ChatInput {
-  position: absolute;
-  bottom: 0;
+  position: relative;
   width: 100%;
-  padding: 16px 30px;
+  padding: 16px 0;
 
   input {
     padding: 18px;
@@ -11,8 +10,13 @@
     font-weight: 300;
     border-radius: 12px;
     border: transparent;
-    outline-color: var(--primary-color);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+    &:focus {
+      // outline-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0px 0px 0px 1.2px var(--primary-color);
+    }
 
     &::placeholder {
       color: var(--gray-bold);
@@ -23,7 +27,7 @@
 
   &__action-group {
     position: absolute;
-    right: 46px;
+    right: 24px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;

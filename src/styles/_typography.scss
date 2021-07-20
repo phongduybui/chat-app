@@ -7,7 +7,6 @@
 @font-face {
   font-family: 'Sofia Pro';
   font-weight: 300;
-  font-style: italic;
   src: local('Sofia Pro'),
     url(../assets/fonts/Sofia-Pro-Light.otf) format('opentype');
 }
@@ -53,5 +52,5 @@
 .text-secondary {
   font-size: 13px;
   color: var(--gray-bold);
-  font-weight: 300;
+  font-weight: 400;
 }

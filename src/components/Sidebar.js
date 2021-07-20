@@ -6,12 +6,16 @@ import {
   BiGroup,
   BiPhone,
   BiUserPin,
-  BiMoon,
+  BiLogOutCircle,
   BiCog,
 } from 'react-icons/bi';
 import Avatar from './Avatar';
+import { signOut } from '../firebase/services';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
+  const { userInfo } = useSelector((state) => state.user);
+
   return (
     <aside className='Sidebar'>
       <div className='brand'>
@@ -46,16 +50,13 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item'>
-          <button className='nav__link'>
-            <BiMoon />
+          <button className='nav__link' onClick={signOut} title='Sign Out'>
+            <BiLogOutCircle />
           </button>
         </li>
       </ul>
       <div className='user'>
-        <Avatar
-          size={36}
-          src={`https://ui-avatars.com/api/?background=random&color=fff&name=DP`}
-        />
+        <Avatar size={36} src={userInfo?.photoURL} />
       </div>
     </aside>
   );

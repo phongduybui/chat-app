@@ -99,6 +99,13 @@
         }
       }
     }
+
+    .members {
+      background-color: red;
+      .member-wrapper {
+        @include flex(row, space-between, center);
+      }
+    }
   }
 
   &__chat-box {
@@ -127,7 +134,7 @@
         @include flex(row, flex-start, flex-end);
         cursor: pointer;
         background-color: var(--primary-color-background);
-        padding: 18px 16px;
+        padding: 18px 28px;
         border-radius: 12px;
       }
 

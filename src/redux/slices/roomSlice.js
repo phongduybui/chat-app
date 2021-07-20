@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { roomList: [], selectedRoomId: null };
+const initialState = { roomList: [], selectedRoom: null };
 
 export const roomSlice = createSlice({
   name: 'rooms',
@@ -16,7 +16,7 @@ export const roomSlice = createSlice({
     },
     setSelectedRoom: {
       reducer: (state, action) => {
-        state.selectedRoomId = action.payload;
+        state.selectedRoom = action.payload;
       },
       prepare: (selectedRoom) => {
         return { payload: selectedRoom };

@@ -14,13 +14,18 @@
   }
 
   &__info {
-    @include flex(row, space-between);
+    @include flex(row, space-between, center);
+
+    .user-name {
+      max-width: 110px;
+      @include textOverflow;
+    }
   }
 
   &__latest-message {
     max-width: 140px;
     margin-bottom: 0;
-    margin-top: spacing(0.5);
+    margin-top: 8px;
     @include textOverflow;
   }
 }

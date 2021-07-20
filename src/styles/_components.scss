@@ -5,6 +5,14 @@
 @import '../components/ChatPreviewItem';
 @import '../components/FileType';
 @import '../components/ChatBox';
+@import '../components/ChatInput';
+@import '../components/Avatar';
+@import '../components/Message';
+@import '../components/AvatarGroup';
+@import '../components/Modal/Modal';
+@import '../components/Modal/AddRoomModal';
+@import '../components/Modal/InviteUserModal';
 
 // Pages
 @import '../pages/ChatPage';
+@import '../pages/LoginPage';

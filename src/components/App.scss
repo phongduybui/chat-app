@@ -1,9 +1,15 @@
 .App {
+  min-height: 100vh;
   main {
     margin-left: $sidebar-width;
     min-height: 100vh;
     & > div {
       height: 100vh;
     }
+  }
+
+  .loading {
+    height: 100vh;
+    display: flex;
   }
 }

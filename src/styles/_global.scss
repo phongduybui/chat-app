@@ -18,3 +18,9 @@ button {
   outline: none;
   border: none;
 }
+
+.Toastify__toast--dark {
+  .Toastify__toast-body {
+    font-size: 14px;
+  }
+}

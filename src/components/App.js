@@ -1,20 +1,60 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Router, Switch, Route } from 'react-router-dom';
+import { signInAction, signOutAction } from '../redux/slices/userSlice';
+import { onAuthStateChanged } from '../firebase/services';
+import { ReactComponent as LoadingAnimated } from '../assets/icons/loading.svg';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import history from '../history';
 import ChatPage from '../pages/ChatPage';
+import LoginPage from '../pages/LoginPage';
 import Sidebar from './Sidebar';
+import RegisterPage from '../pages/RegisterPage';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged((user) => {
+      if (user) {
+        const { uid, displayName, photoURL, email } = user;
+        dispatch(signInAction({ uid, displayName, photoURL, email }));
+        setIsLoading(false);
+      } else {
+        // No user is signed in.
+        dispatch(signOutAction());
+        setIsLoading(false);
+        history.push('/login');
+      }
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
+
   return (
-    <div className='App'>
-      <Router>
-        <Sidebar />
-        <main>
+    <Router history={history}>
+      <div className='App'>
+        {isLoading ? (
+          <div className='loading'>
+            <LoadingAnimated />
+          </div>
+        ) : (
           <Switch>
-            <Route path='/' component={ChatPage} exact />
+            <Route path='/login' component={LoginPage} />
+            <Route path='/register' component={RegisterPage} />
+            <Route>
+              <Sidebar />
+              <main>
+                <Route path='/:roomId?' component={ChatPage} exact />
+              </main>
+              <ToastContainer position='bottom-right' autoClose={3000} />
+            </Route>
           </Switch>
-        </main>
-      </Router>
-    </div>
+        )}
+      </div>
+    </Router>
   );
 };
 

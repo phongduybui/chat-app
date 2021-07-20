@@ -2,17 +2,18 @@
   @include flex(row, flex-start, flex-end);
 
   & + & {
-    margin-top: 32px;
+    margin-top: 12px;
   }
 
   &__list {
+    position: relative;
     max-width: 60%;
   }
 
   &__content {
     position: relative;
     background-color: #fff;
-    padding: 14px 18px;
+    padding: 12px 18px;
     font-size: 15px;
     border-radius: 12px;
     margin-left: 16px;
@@ -37,16 +38,41 @@
         border-left: $triangle-width solid transparent;
       }
 
-      &--author {
-        border-bottom-right-radius: unset;
-        &::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          right: -$triangle-width;
-          border-bottom: 12px solid #fff;
-          border-right: $triangle-width solid transparent;
-        }
+      // &--author {
+      //   border-bottom-right-radius: unset;
+      //   &::before {
+      //     content: '';
+      //     position: absolute;
+      //     bottom: 0;
+      //     right: -$triangle-width;
+      //     border-bottom: 12px solid #fff;
+      //     border-right: $triangle-width solid transparent;
+      //   }
+      // }
+    }
+  }
+
+  &--author {
+    flex-direction: row-reverse;
+
+    .Avatar__wrapper {
+      margin-left: 16px;
+    }
+
+    .Message__content--first {
+      border-bottom-right-radius: unset;
+      border-bottom-left-radius: 12px;
+      margin-left: 0;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -10px;
+        border-bottom: 12px solid #fff;
+        border-right: 10px solid transparent;
+      }
+      &::before {
+        display: none;
       }
     }
   }
