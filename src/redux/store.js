@@ -9,4 +9,8 @@ export const store = configureStore({
     isAddRoomVisible: roomModalReducer,
     rooms: roomReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
