@@ -18,11 +18,12 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+const storage = firebase.storage();
 
-if (window.location.hostname === 'localhost') {
-  auth.useEmulator('http://localhost:9099');
-  db.useEmulator('localhost', '8080');
-}
+// if (window.location.hostname === 'localhost') {
+//   auth.useEmulator('http://localhost:9099');
+//   db.useEmulator('localhost', '8080');
+// }
 
-export { auth, db };
+export { auth, db, storage };
 export default firebase;

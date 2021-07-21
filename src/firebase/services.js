@@ -1,4 +1,4 @@
-import firebase, { auth, db } from './config';
+import firebase, { auth, db, storage } from './config';
 
 export async function signInWithGoogle() {
   const ggProvider = new firebase.auth.GoogleAuthProvider();
@@ -113,4 +113,112 @@ export const generateKeywords = (displayName) => {
   }, []);
 
   return keywords;
+};
+
+export const fetchUserList = (searchTerm, curMembers) => {
+  return db
+    .collection('users')
+    .where('keywords', 'array-contains', searchTerm?.toLowerCase())
+    .orderBy('displayName')
+    .limit(20)
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs
+        .map((doc) => ({
+          displayName: doc.data().displayName,
+          uid: doc.data().uid,
+          photoURL: doc.data().photoURL,
+        }))
+        .filter((opt) => !curMembers.includes(opt.value));
+    });
+};
+
+export const fetchRoomList = (searchTerm) => {
+  return db
+    .collection('rooms')
+    .where('name', '==', searchTerm)
+    .orderBy('name')
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs.map((doc) => ({
+        ...doc.data(),
+      }));
+    });
+};
+
+export const fetchUserByUID = async (userId) => {
+  try {
+    const response = await db
+      .collection('users')
+      .where('uid', '==', userId)
+      .get();
+
+    const user = response.docs.map((doc) => ({
+      displayName: doc.data().displayName,
+      photoURL: doc.data().photoURL,
+      uid: doc.data().uid,
+      email: doc.data().email,
+    }));
+
+    return user[0];
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const LOADING_IMAGE_URL =
+  'https://media.giphy.com/media/7VDiGv55B4IX8CHdJU/source.gif';
+
+// Saves a new message containing an image in Firebase.
+// This first saves the image in Firebase storage.
+export function saveImageMessage(file, roomId) {
+  // 1 - We add a message with a loading icon that will get updated with the shared image.
+  db.collection('messages')
+    .add({
+      uid: auth.currentUser.uid,
+      displayName: auth.currentUser.displayName,
+      imageUrl: LOADING_IMAGE_URL,
+      photoURL: auth.currentUser.photoURL,
+      roomId: roomId,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(function (messageRef) {
+      // 2 - Upload the image to Cloud Storage.
+      var filePath = roomId + '/' + file.name;
+      return firebase
+        .storage()
+        .ref(filePath)
+        .put(file)
+        .then(function (fileSnapshot) {
+          // 3 - Generate a public URL for the file.
+          return fileSnapshot.ref.getDownloadURL().then((url) => {
+            // 4 - Update the chat message placeholder with the image's URL.
+            return messageRef.update({
+              imageUrl: url,
+              storageUri: fileSnapshot.metadata.fullPath,
+            });
+          });
+        });
+    })
+    .catch(function (error) {
+      console.error(
+        'There was an error uploading a file to Cloud Storage:',
+        error
+      );
+    });
+}
+
+export const fetchListImageInRoom = (roomId) => {
+  var listRef = storage.ref().child(roomId);
+
+  // Find all the prefixes and items.
+  return listRef
+    .listAll()
+    .then((res) => {
+      const urlsPromise = res.items.map((itemRef) => itemRef.getDownloadURL());
+      return Promise.all(urlsPromise);
+    })
+    .catch((error) => {
+      console.og(error);
+    });
 };
