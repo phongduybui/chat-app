@@ -1,0 +1,29 @@
+.Accordion {
+  font-size: 14px;
+  color: var(--gray-bold);
+  &__btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    > svg {
+      margin-left: auto;
+      font-size: 20px;
+      transition: all 0.2s linear;
+    }
+
+    &.active > svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__title {
+    @include flexCenter();
+  }
+
+  &__content {
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.4s ease;
+  }
+}
