@@ -53,6 +53,10 @@ export const userSlice = createSlice({
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.userInfo = action.payload;
     });
+
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.error = action.error.message;
+    });
   },
 });
 

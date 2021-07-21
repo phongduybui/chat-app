@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux';
 import Avatar from './Avatar';
 import { formatRelativeDate } from '../utils/formatDate';
 
-const Message = ({ displayName, text, photoURL, uid, createdAt }) => {
+const Message = ({ displayName, text, photoURL, uid, createdAt, imageUrl }) => {
   const { userInfo } = useSelector((state) => state.user);
+
+  const handleImageClick = () => {};
 
   return (
     <div
@@ -19,7 +21,26 @@ const Message = ({ displayName, text, photoURL, uid, createdAt }) => {
         {/* <div className='Message__content '>
           Content
         </div> */}
-        <div className='Message__content Message__content--first'>{text}</div>
+        <div className='Message__content Message__content--first'>
+          {imageUrl ? (
+            <a
+              href={imageUrl}
+              target='_blank'
+              download='download-image'
+              rel='noreferrer'
+              className='link-download-img'
+            >
+              <img
+                onClick={handleImageClick}
+                className='image-message'
+                src={imageUrl}
+                alt=''
+              />
+            </a>
+          ) : (
+            text
+          )}
+        </div>
       </div>
     </div>
   );

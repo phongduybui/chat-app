@@ -39,6 +39,10 @@
           .ChatPreviewItem {
             transition: all 0.2s;
             padding: 10px 0px;
+
+            .ChatPreviewItem__wrapper {
+              display: none;
+            }
           }
         }
       }
@@ -99,13 +103,6 @@
         }
       }
     }
-
-    .members {
-      background-color: red;
-      .member-wrapper {
-        @include flex(row, space-between, center);
-      }
-    }
   }
 
   &__chat-box {
@@ -113,11 +110,43 @@
   }
 
   &__shared-files {
+    display: flex;
+    flex-direction: column;
+
+    .CollapsibleBar__content {
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
     .user {
       @include flexCenter(column);
 
       > * {
         margin-bottom: spacing(1.5);
+      }
+
+      .members {
+        width: 100%;
+
+        .member-wrapper {
+          @include flex(row, space-between, center);
+          padding: 8px 0px;
+        }
+        .member-info {
+          @include flexCenter();
+          font-size: 14px;
+
+          .member-name {
+            margin-left: 8px;
+            color: var(--text-black);
+          }
+        }
+        .member-action {
+          color: var(--gray-bold);
+          cursor: pointer;
+        }
       }
     }
 
@@ -168,10 +197,12 @@
       > button {
         @include flexCenter();
         color: var(--gray-bold);
+        padding-right: 0;
       }
     }
 
     &.collapse {
+      width: 72px;
       & .CollapsibleBar__content {
         .user {
           .Avatar__wrapper,
@@ -180,10 +211,31 @@
             height: 35px !important;
             transition: all 0.3s;
           }
+          .AvatarGroup {
+            position: relative;
+            @include flexCenter();
+            .Avatar__wrapper,
+            .Avatar,
+            .extra-avatar {
+              width: 20px !important;
+              height: 20px !important;
+              transition: all 0.3s;
+            }
+            .Avatar__wrapper {
+              left: 0;
+            }
+            .extra-avatar {
+              position: absolute;
+              left: 10px;
+              top: 16px;
+              font-size: 11px;
+            }
+          }
+
           &__name {
             display: none;
           }
-          .text-secondary {
+          .Accordion {
             display: none;
           }
         }
@@ -204,6 +256,9 @@
           &__btn-expand {
             display: none;
           }
+        }
+        .FileType__accordion .Accordion__content {
+          display: none;
         }
       }
     }

@@ -26,6 +26,14 @@
       margin-top: 8px;
     }
 
+    .link-download-img {
+      @include flexCenter();
+    }
+    .image-message {
+      object-fit: cover;
+      max-width: 200px;
+    }
+
     &--first {
       $triangle-width: 10px;
       border-bottom-left-radius: unset;

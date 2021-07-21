@@ -19,8 +19,11 @@ button {
   border: none;
 }
 
-.Toastify__toast--dark {
+.Toastify__toast {
   .Toastify__toast-body {
+    color: #fff;
     font-size: 14px;
+    font-weight: 600;
+    font-family: 'Sofia Pro', sans-serif;
   }
 }

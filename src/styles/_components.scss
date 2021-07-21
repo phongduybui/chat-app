@@ -9,6 +9,7 @@
 @import '../components/Avatar';
 @import '../components/Message';
 @import '../components/AvatarGroup';
+@import '../components/Accordion';
 @import '../components/Modal/Modal';
 @import '../components/Modal/AddRoomModal';
 @import '../components/Modal/InviteUserModal';
@@ -16,3 +17,4 @@
 // Pages
 @import '../pages/ChatPage';
 @import '../pages/LoginPage';
+@import '../pages/RegisterPage';

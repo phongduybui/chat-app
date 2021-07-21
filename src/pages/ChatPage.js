@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CollapsibleBar from '../components/CollapsibleBar';
 import Avatar from '../components/Avatar';
 import SearchBox from '../components/SearchBox';
-import {
-  AiFillFile,
-  AiFillPicture,
-  AiFillPlaySquare,
-  AiFillSwitcher,
-} from 'react-icons/ai';
+import { AiFillFile, AiFillPicture, AiFillPlaySquare } from 'react-icons/ai';
 import { BiMessageAdd, BiDotsVerticalRounded } from 'react-icons/bi';
 import { BsFillFolderSymlinkFill, BsFillFolderFill } from 'react-icons/bs';
 import ChatPreviewItem from '../components/ChatPreviewItem';
@@ -17,19 +12,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import AddRoomModal from '../components/Modal/AddRoomModal';
 import useFirestore from '../hooks/useFirestore';
-import { setRooms, setSelectedRoom } from '../redux/slices/roomSlice';
+import {
+  fetchImagesShared,
+  fetchMembersInRoom,
+  setRooms,
+  setSelectedRoom,
+} from '../redux/slices/roomSlice';
 import { formatDateToNow } from '../utils/formatDate';
 import AvatarGroup from '../components/AvatarGroup';
+import Accordion from '../components/Accordion';
 
-const ChatPage = ({ match }) => {
+const ChatPage = ({ match, history }) => {
   const dispatch = useDispatch();
-
-  const roomId = match.params.id;
 
   const [userState, setUserState] = useState('available');
   const { userInfo } = useSelector((state) => state.user);
   const { isVisible } = useSelector((state) => state.isAddRoomVisible);
-  const { roomList, selectedRoom } = useSelector((state) => state.rooms);
+  const { roomList, selectedRoom, roomMembers, roomImages } = useSelector(
+    (state) => state.rooms
+  );
 
   const roomsCondition = React.useMemo(() => {
     return {
@@ -43,8 +44,16 @@ const ChatPage = ({ match }) => {
 
   useEffect(() => {
     dispatch(setRooms(rooms));
-    dispatch(setSelectedRoom(rooms[0]));
   }, [dispatch, rooms]);
+
+  useEffect(() => {
+    if (match.params.roomId) {
+      const roomSelected = roomList.find((r) => r.id === match.params.roomId);
+      dispatch(setSelectedRoom(roomSelected));
+      dispatch(fetchMembersInRoom());
+      dispatch(fetchImagesShared({ roomId: match.params.roomId }));
+    }
+  }, [dispatch, match.params.roomId, roomList]);
 
   return (
     <div className='ChatPage'>
@@ -92,33 +101,34 @@ const ChatPage = ({ match }) => {
         className='ChatPage__shared-files'
       >
         <div className='user'>
-          {/* <AvatarGroup>
-            {selectedRoom?.members.map((mem) => (
-              <Avatar
-                size={70}
-                hasBorder
-                // src={mem}
-              />
-            ))}
-          </AvatarGroup> */}
+          {roomMembers.length > 2 ? (
+            <AvatarGroup>
+              {roomMembers.map((mem) => (
+                <Avatar key={mem.uid} size={60} hasBorder src={mem.photoURL} />
+              ))}
+            </AvatarGroup>
+          ) : (
+            <Avatar
+              src={`https://ui-avatars.com/api/?background=random&color=fff&name=${selectedRoom?.name}`}
+              size={70}
+            />
+          )}
 
           <span className='user__name title'>{selectedRoom?.name}</span>
           <div className='members'>
-            <span className='text-secondary'>Members</span>
-            <div className='members-list'>
-              <div className='member-wrapper'>
-                <div>
-                  <Avatar
-                    size={28}
-                    src='https://ui-avatars.com/api/?background=random&color=fff&name=random'
-                  />
-                  <span className='member-name'>Duy Phong</span>
+            <Accordion title='Members'>
+              {roomMembers.map((mem) => (
+                <div className='member-wrapper' key={mem.uid}>
+                  <div className='member-info'>
+                    <Avatar size={28} src={mem.photoURL} />
+                    <span className='member-name'>{mem.displayName}</span>
+                  </div>
+                  <span className='member-action'>
+                    <BiDotsVerticalRounded fontSize={18} />
+                  </span>
                 </div>
-                <span className='member-action'>
-                  <BiDotsVerticalRounded fontSize={18} />
-                </span>
-              </div>
-            </div>
+              ))}
+            </Accordion>
           </div>
         </div>
         <div className='type'>
@@ -145,32 +155,34 @@ const ChatPage = ({ match }) => {
         </div>
         <div>
           <FileType
-            type='Documents'
-            Icon={<AiFillFile />}
-            qty={213}
-            size={50}
-            color='#5A68DF'
-          />
-          <FileType
             type='Photos'
             Icon={<AiFillPicture />}
-            qty={213}
-            size={50}
+            qty={roomImages.length}
             color='#CCBA89'
+          >
+            {roomImages.map((imgUrl) => (
+              <a
+                href={imgUrl}
+                download
+                target='_blank'
+                rel='noreferrer'
+                key={imgUrl}
+              >
+                <img src={imgUrl} className='room-images' alt='' />
+              </a>
+            ))}
+          </FileType>
+          <FileType
+            type='Documents'
+            Icon={<AiFillFile />}
+            qty={0}
+            color='#5A68DF'
           />
           <FileType
             type='Videos'
             Icon={<AiFillPlaySquare />}
-            qty={213}
-            size={50}
+            qty={0}
             color='#5AB0BA'
-          />
-          <FileType
-            type='Others'
-            Icon={<AiFillSwitcher />}
-            qty={213}
-            size={50}
-            color='#BE6E5F'
           />
         </div>
       </CollapsibleBar>

@@ -7,11 +7,9 @@ const AvatarGroup = ({ children, max = 2, className }) => {
 
   const extraAvatars = count > max ? count - max + 1 : 0;
 
-  console.log({ count, max, extraAvatars });
   return (
     <div className={clsx('AvatarGroup', className)}>
       {childrenArray.slice(0, count - extraAvatars + 1).map((child, i) => {
-        console.log(i);
         return React.cloneElement(child, {
           className: clsx('Avatar-child'),
         });

@@ -3,7 +3,8 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { MdAttachFile, MdTagFaces } from 'react-icons/md';
 import { IoPaperPlane } from 'react-icons/io5';
-import { addDocument } from '../firebase/services';
+import { addDocument, saveImageMessage } from '../firebase/services';
+import { toast } from 'react-toastify';
 
 const ChatInput = ({ userInfo, roomId }) => {
   const [textMessage, setTextMessage] = useState('');
@@ -37,6 +38,19 @@ const ChatInput = ({ userInfo, roomId }) => {
     }
   };
 
+  const handleUploadFile = (e) => {
+    const file = e.target.files[0];
+    const isImage = file.type.match('image.*');
+
+    if (!isImage) {
+      toast.warn('❗You can only share images!');
+      return;
+    }
+    console.log('image');
+    console.log({ file });
+    saveImageMessage(file, roomId);
+  };
+
   useEffect(() => {
     const handleCloseEmojiMenu = (e) => {
       if (
@@ -56,6 +70,7 @@ const ChatInput = ({ userInfo, roomId }) => {
     <form className='ChatInput' onSubmit={handleFormSubmit}>
       <input
         type='text'
+        className='input'
         placeholder='Write your message...'
         value={textMessage}
         onChange={(e) => setTextMessage(e.target.value)}
@@ -69,9 +84,12 @@ const ChatInput = ({ userInfo, roomId }) => {
         >
           <MdTagFaces />
         </button>
-        <button type='button' className='btn btn__secondary'>
+
+        <input id='input-file' type='file' onChange={handleUploadFile} hidden />
+        <label htmlFor='input-file' className='btn btn__secondary'>
           <MdAttachFile />
-        </button>
+        </label>
+
         <button type='submit' className='btn btn__send'>
           <IoPaperPlane />
         </button>

@@ -17,7 +17,6 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log('submit');
     if (selectedUsers) {
       const roomRef = db.collection('rooms').doc(props.roomId);
 
