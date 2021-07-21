@@ -1,0 +1,104 @@
+.LoginPage {
+  height: 100vh;
+  background-color: var(--primary-color-background);
+  background-image: url('../assets/background-login.jpeg');
+  // background-image: url('https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include flexCenter();
+  button {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .login-form {
+    width: 400px;
+    height: 85%;
+    background: #fff;
+    padding: 32px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    font-size: 16px;
+    @include flex(column, flex-start, center);
+
+    & > * {
+      width: 100%;
+      margin-bottom: 16px;
+      border-radius: 2px;
+    }
+
+    input {
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      outline-color: var(--primary-color);
+    }
+
+    label {
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .error {
+      margin-top: 0;
+      color: #f44336;
+      font-size: 14px;
+    }
+
+    .btn-login {
+      padding: 12px 12px;
+      background: var(--primary-color);
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .divider {
+      margin: 16px 0;
+      color: var(--gray-bold);
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .provider {
+      @include flex(row, center, center);
+
+      .fb,
+      .gg {
+        font-size: 16px;
+        padding: 12px 24px;
+        background: transparent;
+        border: 1px solid #ddd;
+        margin: 8px;
+        @include flexCenter();
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+
+      .fb svg {
+        color: #2d7ae9;
+      }
+
+      .gg svg {
+        color: red;
+      }
+    }
+
+    .h1 {
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .link-register {
+      text-align: center;
+
+      a {
+        color: #1976d2;
+      }
+    }
+  }
+}
