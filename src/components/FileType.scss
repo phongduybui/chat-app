@@ -2,6 +2,12 @@
   @include flex(row, space-between, center);
   padding: spacing(1) 0;
 
+  &__accordion {
+    .Accordion__btn {
+      margin-bottom: 0;
+    }
+  }
+
   &__icon {
     @include flexCenter();
     position: relative;
@@ -33,5 +39,23 @@
 
   &__btn-expand {
     font-size: 20px;
+    transition: all 0.2s;
+
+    // Make icon rotate in the center of icon
+    display: flex;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.FileType__accordion {
+  .room-images {
+    object-fit: cover;
+    width: 82px;
+    height: 82px;
+    border-radius: 2px;
+    margin: 6px;
   }
 }
