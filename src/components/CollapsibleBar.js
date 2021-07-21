@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-const CollapsibleBar = ({ title, direction, className, children }) => {
-  const [collapse, setCollapse] = useState(false);
+const CollapsibleBar = ({
+  title,
+  direction,
+  className,
+  children,
+  defaultState,
+}) => {
+  const [collapse, setCollapse] = useState(defaultState);
 
   return (
     <div className={clsx('CollapsibleBar', className, collapse && 'collapse')}>

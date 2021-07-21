@@ -74,7 +74,12 @@ const ChatPage = ({ match, history }) => {
 
   return (
     <div className='ChatPage'>
-      <CollapsibleBar direction='left' title='Chat' className='ChatPage__user'>
+      <CollapsibleBar
+        defaultState={false}
+        direction='left'
+        title='Chat'
+        className='ChatPage__user'
+      >
         <div className='user'>
           <Avatar size={70} userState={userState} src={userInfo?.photoURL} />
           <span className='user__name title'>{userInfo?.displayName}</span>
@@ -113,6 +118,7 @@ const ChatPage = ({ match, history }) => {
         <ChatBox />
       </div>
       <CollapsibleBar
+        defaultState={true}
         direction='right'
         title='Shared Files'
         className='ChatPage__shared-files'
@@ -122,10 +128,10 @@ const ChatPage = ({ match, history }) => {
             <AvatarGroup>
               {roomMembers.map((mem, index) => (
                 <Avatar
-                  key={mem.uid || index}
+                  key={mem?.uid || index}
                   size={60}
                   hasBorder
-                  src={mem.photoURL}
+                  src={mem?.photoURL}
                 />
               ))}
             </AvatarGroup>
