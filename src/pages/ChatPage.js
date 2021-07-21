@@ -11,7 +11,6 @@ import ChatBox from '../components/ChatBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import AddRoomModal from '../components/Modal/AddRoomModal';
-import useFirestore from '../hooks/useFirestore';
 import {
   fetchImagesShared,
   fetchMembersInRoom,
@@ -21,39 +20,57 @@ import {
 import { formatDateToNow } from '../utils/formatDate';
 import AvatarGroup from '../components/AvatarGroup';
 import Accordion from '../components/Accordion';
+import { db } from '../firebase/config';
 
 const ChatPage = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const [userState, setUserState] = useState('available');
   const { userInfo } = useSelector((state) => state.user);
+  const { messages } = useSelector((state) => state.message);
   const { isVisible } = useSelector((state) => state.isAddRoomVisible);
   const { roomList, selectedRoom, roomMembers, roomImages } = useSelector(
     (state) => state.rooms
   );
 
-  const roomsCondition = React.useMemo(() => {
-    return {
-      fieldName: 'members',
-      operator: 'array-contains',
-      compareValue: userInfo?.uid,
-    };
-  }, [userInfo]);
-
-  const rooms = useFirestore('rooms', roomsCondition);
-
   useEffect(() => {
-    dispatch(setRooms(rooms));
-  }, [dispatch, rooms]);
+    let collectionRef = db.collection('rooms').orderBy('createdAt');
+
+    if (userInfo?.uid) {
+      collectionRef = collectionRef.where(
+        'members',
+        'array-contains',
+        userInfo.uid
+      );
+    }
+
+    const unsubscribe = collectionRef.onSnapshot((snapshot) => {
+      const rooms = snapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
+
+      dispatch(setRooms(rooms));
+    });
+
+    return unsubscribe;
+  }, [dispatch, userInfo]);
 
   useEffect(() => {
     if (match.params.roomId) {
       const roomSelected = roomList.find((r) => r.id === match.params.roomId);
-      dispatch(setSelectedRoom(roomSelected));
+      dispatch(setSelectedRoom(roomSelected || ''));
       dispatch(fetchMembersInRoom());
-      dispatch(fetchImagesShared({ roomId: match.params.roomId }));
     }
   }, [dispatch, match.params.roomId, roomList]);
+
+  useEffect(() => {
+    if (match.params.roomId) {
+      dispatch(fetchImagesShared({ roomId: match.params.roomId }));
+    }
+  }, [dispatch, match.params.roomId, messages]);
 
   return (
     <div className='ChatPage'>
@@ -82,11 +99,11 @@ const ChatPage = ({ match, history }) => {
           <div className='list-chat'>
             {roomList.map((room, index) => (
               <ChatPreviewItem
-                key={room.id || index}
-                id={room.id}
-                name={room.name}
-                desc={room.desc}
-                time={formatDateToNow(room.createdAt?.seconds || 1)}
+                key={room?.id || index}
+                id={room?.id}
+                name={room?.name}
+                desc={room?.desc}
+                time={formatDateToNow(room?.createdAt?.seconds || 1)}
               />
             ))}
           </div>
@@ -103,8 +120,13 @@ const ChatPage = ({ match, history }) => {
         <div className='user'>
           {roomMembers.length > 2 ? (
             <AvatarGroup>
-              {roomMembers.map((mem) => (
-                <Avatar key={mem.uid} size={60} hasBorder src={mem.photoURL} />
+              {roomMembers.map((mem, index) => (
+                <Avatar
+                  key={mem.uid || index}
+                  size={60}
+                  hasBorder
+                  src={mem.photoURL}
+                />
               ))}
             </AvatarGroup>
           ) : (
@@ -117,11 +139,11 @@ const ChatPage = ({ match, history }) => {
           <span className='user__name title'>{selectedRoom?.name}</span>
           <div className='members'>
             <Accordion title='Members'>
-              {roomMembers.map((mem) => (
-                <div className='member-wrapper' key={mem.uid}>
+              {roomMembers.map((mem, index) => (
+                <div className='member-wrapper' key={mem?.uid || index}>
                   <div className='member-info'>
-                    <Avatar size={28} src={mem.photoURL} />
-                    <span className='member-name'>{mem.displayName}</span>
+                    <Avatar size={28} src={mem?.photoURL} />
+                    <span className='member-name'>{mem?.displayName}</span>
                   </div>
                   <span className='member-action'>
                     <BiDotsVerticalRounded fontSize={18} />
@@ -136,14 +158,14 @@ const ChatPage = ({ match, history }) => {
             <BsFillFolderFill />
             <div className='type__info'>
               <span className='type__title'>All files</span>
-              <span className='type__qty'>231</span>
+              <span className='type__qty'>{roomImages.length}</span>
             </div>
           </div>
           <div className='type__wrapper'>
             <BsFillFolderSymlinkFill />
             <div className='type__info'>
               <span className='type__title'>All links</span>
-              <span className='type__qty'>231</span>
+              <span className='type__qty'>0</span>
             </div>
           </div>
         </div>

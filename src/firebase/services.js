@@ -129,7 +129,7 @@ export const fetchUserList = (searchTerm, curMembers) => {
           uid: doc.data().uid,
           photoURL: doc.data().photoURL,
         }))
-        .filter((opt) => !curMembers.includes(opt.value));
+        .filter((opt) => !curMembers.includes(opt.uid));
     });
 };
 

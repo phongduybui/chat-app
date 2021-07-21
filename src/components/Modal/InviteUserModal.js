@@ -31,8 +31,8 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
   };
 
   const handleSelectUser = (user) => {
-    const checkUser = selectedUsers.find((u) => u.uid === user.uid);
-    if (checkUser) {
+    const existUser = selectedUsers.find((u) => u.uid === user.uid);
+    if (existUser) {
       setSelectedUsers(selectedUsers.filter((u) => u.uid !== user.uid));
     } else {
       setSelectedUsers([...selectedUsers, user]);

@@ -10,9 +10,11 @@ const ChatPreviewItem = ({ id, name, latestMessage, time, desc }) => {
   const { roomList } = useSelector((state) => state.rooms);
 
   const handleChatItemClick = (id) => {
-    const selectedRoom = roomList.find((r) => r.id === id);
-    dispatch(setSelectedRoom(selectedRoom));
-    history.push(`/${id}`);
+    if (id) {
+      const selectedRoom = roomList.find((r) => r.id === id);
+      dispatch(setSelectedRoom(selectedRoom || ''));
+      history.push(`/${id}`);
+    }
   };
 
   return (

@@ -4,9 +4,10 @@ import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineUsergroupAdd, AiOutlineInfoCircle } from 'react-icons/ai';
 import { useRouteMatch } from 'react-router';
-import useFirestore from '../hooks/useFirestore';
 import InviteUserModal from './Modal/InviteUserModal';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
+import { db } from '../firebase/config';
+import { setMessages } from '../redux/slices/messageSlice';
 
 const ChatBox = () => {
   const match = useRouteMatch();
@@ -14,20 +15,29 @@ const ChatBox = () => {
   const [openInviteModal, setOpenInviteModal] = useState(false);
   const { roomList } = useSelector((state) => state.rooms);
   const { userInfo } = useSelector((state) => state.user);
-  const selectedRoom = roomList.find((r) => r.id === match.params.roomId);
+  const { messages } = useSelector((state) => state.message);
+  const selectedRoom = roomList.find((r) => r?.id === match.params.roomId);
 
   const ref = useRef(null);
 
-  const messagesCondition = React.useMemo(
-    () => ({
-      fieldName: 'roomId',
-      operator: '==',
-      compareValue: match.params.roomId,
-    }),
-    [match.params.roomId]
-  );
+  useEffect(() => {
+    let collectionRef = db.collection('messages').orderBy('createdAt');
+    if (match.params.roomId) {
+      collectionRef = collectionRef.where('roomId', '==', match.params.roomId);
+    }
+    const unsubscribe = collectionRef.onSnapshot((snapshot) => {
+      const messages = snapshot.docs.map((doc) => {
+        return {
+          ...doc.data(),
+          id: doc.id,
+        };
+      });
 
-  const messages = useFirestore('messages', messagesCondition);
+      dispatch(setMessages(messages));
+    });
+
+    return unsubscribe;
+  }, [dispatch, match.params.roomId]);
 
   useEffect(() => {
     if (messages && ref?.current) {
