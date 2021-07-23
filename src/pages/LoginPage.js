@@ -8,20 +8,26 @@ import {
 } from '../firebase/services';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { ReactComponent as Loading } from '../assets/icons/loading-2.svg';
 
 const LoginPage = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { userInfo } = useSelector((state) => state.user);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
+      setLoading(true);
       signInWithEmail(email, password)
         .then(() => console.log('success login'))
         .catch((error) => {
           setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -55,6 +61,8 @@ const LoginPage = ({ history }) => {
         {error && <p className='error'>{error}</p>}
 
         <button className='btn-login'>LOGIN</button>
+
+        {loading && <Loading />}
 
         <span className='divider'>Or login with</span>
 

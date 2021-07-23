@@ -71,6 +71,7 @@
         padding: 12px 24px;
         background: transparent;
         border: 1px solid #ddd;
+        border-radius: 2px;
         margin: 8px;
         @include flexCenter();
 
@@ -95,6 +96,7 @@
 
     .link-register {
       text-align: center;
+      font-size: 15px;
 
       a {
         color: #1976d2;
