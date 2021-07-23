@@ -137,11 +137,11 @@ export const fetchRoomList = (searchTerm) => {
   return db
     .collection('rooms')
     .where('name', '==', searchTerm)
-    .orderBy('name')
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => ({
         ...doc.data(),
+        id: doc.id,
       }));
     });
 };

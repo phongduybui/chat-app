@@ -17,7 +17,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 16px;
+    right: 8px;
+    padding: 8px;
     @include flexCenter();
     font-size: 18px;
     color: var(--gray-bold);

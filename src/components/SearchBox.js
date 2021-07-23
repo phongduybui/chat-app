@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
+import { BiSearch, BiX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { db } from '../firebase/config';
 import { fetchRoomList } from '../firebase/services';
@@ -10,6 +10,11 @@ const SearchBox = () => {
   const [debouncedTerm, setDebouncedTerm] = useState(term);
 
   const dispatch = useDispatch();
+
+  const clearInput = () => {
+    setDebouncedTerm('');
+    setTerm('');
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,6 +36,7 @@ const SearchBox = () => {
         .then((snapshot) => {
           return snapshot.docs.map((doc) => ({
             ...doc.data(),
+            id: doc.id,
           }));
         })
         .then((rooms) => {
@@ -49,8 +55,8 @@ const SearchBox = () => {
         value={term}
         onChange={(e) => setTerm(e.target.value)}
       />
-      <button className='SearchBox__btn'>
-        <BiSearch />
+      <button type='button' className='SearchBox__btn' onClick={clearInput}>
+        {term ? <BiX fontSize={20} /> : <BiSearch />}
       </button>
     </form>
   );
