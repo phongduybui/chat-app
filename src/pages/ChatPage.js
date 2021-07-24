@@ -93,7 +93,7 @@ const ChatPage = ({ match, history }) => {
             <option value='busy'>busy</option>
           </select>
         </div>
-        <SearchBox />
+        <SearchBox uid={userInfo?.uid} />
         <div className='user__last-chats'>
           <div className='title'>
             <span>Last chats</span>

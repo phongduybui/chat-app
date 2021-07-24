@@ -5,7 +5,7 @@ import { db } from '../firebase/config';
 import { fetchRoomList } from '../firebase/services';
 import { setRooms } from '../redux/slices/roomSlice';
 
-const SearchBox = () => {
+const SearchBox = ({ uid }) => {
   const [term, setTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState(term);
 
@@ -25,13 +25,14 @@ const SearchBox = () => {
   }, [term]);
 
   useEffect(() => {
-    if (debouncedTerm) {
-      fetchRoomList(debouncedTerm).then((rooms) => {
+    if (debouncedTerm && uid) {
+      fetchRoomList(debouncedTerm, uid).then((rooms) => {
         dispatch(setRooms(rooms));
       });
-    } else {
+    } else if (uid) {
       db.collection('rooms')
         .orderBy('createdAt')
+        .where('members', 'array-contains', uid)
         .get()
         .then((snapshot) => {
           return snapshot.docs.map((doc) => ({
@@ -44,7 +45,7 @@ const SearchBox = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [dispatch, debouncedTerm]);
+  }, [dispatch, debouncedTerm, uid]);
 
   return (
     <form className='SearchBox'>

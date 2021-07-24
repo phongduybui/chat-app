@@ -133,10 +133,11 @@ export const fetchUserList = (searchTerm, curMembers) => {
     });
 };
 
-export const fetchRoomList = (searchTerm) => {
+export const fetchRoomList = (searchTerm, uid) => {
   return db
     .collection('rooms')
     .where('name', '==', searchTerm)
+    .where('members', 'array-contains', uid)
     .get()
     .then((snapshot) => {
       return snapshot.docs.map((doc) => ({
