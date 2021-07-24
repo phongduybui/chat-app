@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Linkify from 'react-linkify';
 import { useSelector } from 'react-redux';
 import Avatar from './Avatar';
 import { formatRelativeDate } from '../utils/formatDate';
@@ -38,7 +39,15 @@ const Message = ({ displayName, text, photoURL, uid, createdAt, imageUrl }) => {
               />
             </a>
           ) : (
-            text
+            <Linkify
+              componentDecorator={(decoratedHref, decoratedText, key) => (
+                <a target='blank' href={decoratedHref} key={key}>
+                  {decoratedText}
+                </a>
+              )}
+            >
+              {text}
+            </Linkify>
           )}
         </div>
       </div>
