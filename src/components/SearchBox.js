@@ -48,7 +48,7 @@ const SearchBox = ({ uid }) => {
   }, [dispatch, debouncedTerm, uid]);
 
   return (
-    <form className='SearchBox'>
+    <div className='SearchBox'>
       <input
         type='text'
         placeholder='Search...'
@@ -59,7 +59,7 @@ const SearchBox = ({ uid }) => {
       <button type='button' className='SearchBox__btn' onClick={clearInput}>
         {term ? <BiX fontSize={20} /> : <BiSearch />}
       </button>
-    </form>
+    </div>
   );
 };
 
