@@ -8,7 +8,6 @@ import {
 } from '../firebase/services';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { ReactComponent as Loading } from '../assets/icons/loading-2.svg';
 
 const LoginPage = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -60,9 +59,9 @@ const LoginPage = ({ history }) => {
 
         {error && <p className='error'>{error}</p>}
 
-        <button className='btn-login'>LOGIN</button>
-
-        {loading && <Loading />}
+        <button className='btn-login'>
+          {loading ? <div className='loader' /> : 'LOGIN'}
+        </button>
 
         <span className='divider'>Or login with</span>
 

@@ -49,10 +49,11 @@
     }
 
     .btn-register {
-      padding: 12px 12px;
+      padding: 0 12px;
       background: var(--primary-color);
       font-size: 16px;
       color: #fff;
+      min-height: 42px;
     }
 
     .divider {

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createUser } from '../redux/slices/userSlice';
-import { ReactComponent as Loading } from '../assets/icons/loading-2.svg';
 
 const RegisterPage = ({ history }) => {
   const [name, setName] = useState('');
@@ -60,9 +59,9 @@ const RegisterPage = ({ history }) => {
 
         {error && <p className='error'>{error}</p>}
 
-        <button className='btn-register'>REGISTER</button>
-
-        {loadingCreate && <Loading />}
+        <button className='btn-register'>
+          {loadingCreate ? <div className='loader' /> : 'REGISTER'}
+        </button>
 
         <div className='link-register'>
           Have an account? <Link to='/login'>Login here!</Link>
