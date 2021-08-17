@@ -126,7 +126,7 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
             Cancel
           </button>
           <button type='submit' className='btn-ok'>
-            OK
+            Submit
           </button>
         </div>
       </form>
