@@ -27,6 +27,10 @@
     word-break: break-all;
     white-space: normal;
 
+    > a {
+      color: var(--link-color);
+    }
+
     & + & {
       margin-top: 8px;
     }
