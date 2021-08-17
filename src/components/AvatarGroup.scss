@@ -1,5 +1,6 @@
 .AvatarGroup {
   @include flex(row, flex-start, center);
+  padding-top: 4px; /* Fix cut top */
   .Avatar__wrapper {
     &:nth-child(2) {
       position: relative;

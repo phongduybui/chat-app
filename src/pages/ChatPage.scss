@@ -1,5 +1,6 @@
 .ChatPage {
   @include flex('row', 'flex-start', 'flex-start', 'nowrap');
+  background-color: var(--background-secondary-color);
 
   &__user {
     padding: spacing(2);
@@ -32,7 +33,7 @@
           }
           .list-chat {
             transition: all 0.2s;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid var(--gray-border);
             padding-top: 4px;
             margin-top: 8px;
           }
@@ -67,6 +68,10 @@
 
       > * {
         margin-bottom: spacing(1.5);
+      }
+
+      .user__name {
+        color: var(--text-color);
       }
 
       &__state {
@@ -123,6 +128,10 @@
     .user {
       @include flexCenter(column);
 
+      .user__name {
+        color: var(--text-color);
+      }
+
       > * {
         margin-bottom: spacing(1.5);
       }
@@ -140,7 +149,7 @@
 
           .member-name {
             margin-left: 8px;
-            color: var(--text-black);
+            color: var(--text-color);
           }
         }
         .member-action {

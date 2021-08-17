@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   signInWithGoogle,
   signInWithFacebook,
   signInWithEmail,
 } from '../firebase/services';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 

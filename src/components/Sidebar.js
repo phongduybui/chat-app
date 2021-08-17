@@ -4,10 +4,10 @@ import { ReactComponent as Logo } from '../assets/icons/logo.svg';
 import {
   BiChat,
   BiGroup,
-  BiPhone,
   BiUserPin,
-  BiLogOutCircle,
   BiCog,
+  BiMoon,
+  BiLogOut,
 } from 'react-icons/bi';
 import Avatar from './Avatar';
 import { signOut } from '../firebase/services';
@@ -15,6 +15,10 @@ import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
   const { userInfo } = useSelector((state) => state.user);
+
+  const handleThemeToggle = () => {
+    document?.body?.classList.toggle('dark-mode');
+  };
 
   return (
     <aside className='Sidebar'>
@@ -35,11 +39,6 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item'>
-          <NavLink to='/calls' className='nav__link'>
-            <BiPhone />
-          </NavLink>
-        </li>
-        <li className='nav__item'>
           <NavLink to='/contacts' className='nav__link'>
             <BiUserPin />
           </NavLink>
@@ -50,8 +49,13 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item'>
+          <button className='nav__link' onClick={handleThemeToggle}>
+            <BiMoon />
+          </button>
+        </li>
+        <li className='nav__item'>
           <button className='nav__link' onClick={signOut} title='Sign Out'>
-            <BiLogOutCircle />
+            <BiLogOut />
           </button>
         </li>
       </ul>

@@ -6,11 +6,15 @@
     width: 100%;
     padding: 12px 16px;
     padding-right: spacing(6);
-    background-color: var(--gray-soft);
+    color: var(--text-color);
+    background-color: var(--input-color);
     border: none;
     outline: transparent;
     border-radius: 6px;
     font-size: 14px;
+    &::placeholder {
+      color: var(--gray-bold);
+    }
   }
 
   &__btn {

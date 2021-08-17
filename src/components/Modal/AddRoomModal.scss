@@ -1,11 +1,11 @@
 .AddRoomModal {
-  background: white;
+  background: var(--background-secondary-color);
   width: 400px;
 
   .content {
     padding: 32px 0;
     font-size: 16px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--gray-border);
 
     > * {
       width: 100%;
@@ -17,13 +17,20 @@
       margin-bottom: 8px;
       font-weight: 300;
       font-size: 14px;
+      color: var(--text-color);
     }
 
     input {
       padding: 8px;
       font-weight: 300;
       font-size: 14px;
-      outline-color: var(--primary-color);
+      border: 1px solid var(--gray-border);
+      outline-color: var(--modal-title-color);
+      background-color: var(--background-secondary-color);
+      color: var(--text-color);
+      &::placeholder {
+        color: var(--gray-bold);
+      }
     }
   }
 
@@ -42,7 +49,8 @@
 
     .btn-cancel {
       padding: 8px 12px;
-      border: 1px solid #d5d5d5;
+      border: 1px solid var(--gray-border);
+      color: var(--text-color);
     }
     .btn-ok {
       padding: 8px 12px;

@@ -36,6 +36,7 @@
 .h1 {
   font-size: 19px;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .title {
@@ -45,7 +46,7 @@
 
 .text-primary {
   font-size: 14px;
-  color: var(--text-black);
+  color: var(--text-color);
   font-weight: 600;
 }
 

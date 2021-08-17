@@ -4,11 +4,31 @@
   --primary-color-bold: #447565;
   --primary-color-background: #e0f4f1;
   --background-color: #fff;
-  --background-color-light: #edf0f5;
+  --background-secondary-color: #fff;
+  --chat-box-background-color: #edf0f5;
+  --input-color: #f0f1f3;
   --gray-soft: #f0f1f3;
   --gray-bold: #72808e;
   --gray-border: #ddd;
   --text-black: #001a33;
+  --text-color: #001a33;
+  --message-color: #001a33;
+  --modal-title-color: #4a8f80;
+}
+
+/* Variables color for Dark mode */
+
+.dark-mode {
+  --background-color: #36404a;
+  --background-secondary-color: #303841;
+  --chat-box-background-color: #262e35;
+  --input-color: #36404a;
+  --gray-soft: #303841;
+  --gray-bold: #e1e9f1;
+  --gray-border: #4b5661;
+  --text-color: #e1e9f1;
+  --message-color: #eff2f7;
+  --modal-title-color: #fff;
 }
 
 /* ------------------------------------------------------- */

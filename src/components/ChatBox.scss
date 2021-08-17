@@ -1,6 +1,6 @@
 .ChatBox {
   // position: relative;
-  background-color: var(--background-color-light);
+  background-color: var(--chat-box-background-color);
   height: calc(100% - 32px);
   margin: 16px 8px;
   padding: 0 16px;
@@ -17,7 +17,7 @@
     padding: spacing(2) 0;
     border-bottom: 1px solid var(--gray-border);
     height: $collapsible-bar-title-height;
-    background-color: var(--background-color-light);
+    background-color: var(--chat-box-background-color);
 
     .h1 {
       margin: 0;

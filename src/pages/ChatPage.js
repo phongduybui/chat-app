@@ -2,27 +2,27 @@ import React, { useEffect, useState } from 'react';
 import CollapsibleBar from '../components/CollapsibleBar';
 import Avatar from '../components/Avatar';
 import SearchBox from '../components/SearchBox';
-import { AiFillFile, AiFillPicture, AiFillPlaySquare } from 'react-icons/ai';
-import { BiMessageAdd, BiDotsVerticalRounded } from 'react-icons/bi';
-import { BsFillFolderSymlinkFill, BsFillFolderFill } from 'react-icons/bs';
 import ChatPreviewItem from '../components/ChatPreviewItem';
 import FileType from '../components/FileType';
 import ChatBox from '../components/ChatBox';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import AddRoomModal from '../components/Modal/AddRoomModal';
+import AvatarGroup from '../components/AvatarGroup';
+import Accordion from '../components/Accordion';
 import {
   fetchImagesShared,
   fetchMembersInRoom,
   setRooms,
   setSelectedRoom,
 } from '../redux/slices/roomSlice';
+import { AiFillFile, AiFillPicture, AiFillPlaySquare } from 'react-icons/ai';
+import { BiMessageAdd, BiDotsVerticalRounded } from 'react-icons/bi';
+import { BsFillFolderSymlinkFill, BsFillFolderFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import { formatDateToNow } from '../utils/formatDate';
-import AvatarGroup from '../components/AvatarGroup';
-import Accordion from '../components/Accordion';
 import { db } from '../firebase/config';
 
-const ChatPage = ({ match, history }) => {
+const ChatPage = ({ match }) => {
   const dispatch = useDispatch();
 
   const [userState, setUserState] = useState('available');
@@ -204,13 +204,13 @@ const ChatPage = ({ match, history }) => {
             type='Documents'
             Icon={<AiFillFile />}
             qty={0}
-            color='#5A68DF'
+            color='#5AB0BA'
           />
           <FileType
             type='Videos'
             Icon={<AiFillPlaySquare />}
             qty={0}
-            color='#5AB0BA'
+            color='#F6A9A9'
           />
         </div>
       </CollapsibleBar>
