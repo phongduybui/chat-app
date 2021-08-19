@@ -8,6 +8,15 @@
   height: 28px;
   -webkit-animation: spin 1s linear infinite; /* Safari */
   animation: spin 1s linear infinite;
+
+  &.invert {
+    border-color: #ddd;
+    border-top-color: var(--primary-color);
+    border-left-color: var(--primary-color);
+  }
+  &.gutter-top {
+    margin-top: 32px;
+  }
 }
 
 /* Safari */
