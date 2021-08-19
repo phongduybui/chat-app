@@ -1,14 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/icons/logo.svg';
-import {
-  BiChat,
-  BiGroup,
-  BiUserPin,
-  BiCog,
-  BiMoon,
-  BiLogOut,
-} from 'react-icons/bi';
+import { BiChat, BiGroup, BiCog, BiMoon, BiLogOut } from 'react-icons/bi';
 import Avatar from './Avatar';
 import { signOut } from '../firebase/services';
 import { useSelector } from 'react-redux';
@@ -34,24 +27,19 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item sm-hide'>
-          <NavLink to='/groups' className='nav__link'>
+          <NavLink to='/users' className='nav__link'>
             <BiGroup />
-          </NavLink>
-        </li>
-        <li className='nav__item'>
-          <NavLink to='/contacts' className='nav__link'>
-            <BiUserPin />
-          </NavLink>
-        </li>
-        <li className='nav__item'>
-          <NavLink to='/setting' className='nav__link'>
-            <BiCog />
           </NavLink>
         </li>
         <li className='nav__item'>
           <button className='nav__link' onClick={handleThemeToggle}>
             <BiMoon />
           </button>
+        </li>
+        <li className='nav__item'>
+          <NavLink to='/setting' className='nav__link'>
+            <BiCog />
+          </NavLink>
         </li>
         <li className='nav__item'>
           <button className='nav__link' onClick={signOut} title='Sign Out'>

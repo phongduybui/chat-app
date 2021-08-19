@@ -49,10 +49,11 @@ export function getCurrentUser() {
 
 export async function addDocument(collection, data) {
   try {
-    await db.collection(collection).add({
+    const docRef = await db.collection(collection).add({
       ...data,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    return docRef.id;
   } catch (error) {
     console.log(error);
   }

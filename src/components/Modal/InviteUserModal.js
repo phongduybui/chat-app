@@ -17,7 +17,7 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (selectedUsers) {
+    if (selectedUsers.length > 0) {
       const roomRef = db.collection('rooms').doc(props.roomId);
 
       roomRef.update({
@@ -28,6 +28,7 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
       toast.dark('✔️ Successfully added users!');
       return;
     }
+    toast.warning('Please select user to invite!');
   };
 
   const handleSelectUser = (user) => {

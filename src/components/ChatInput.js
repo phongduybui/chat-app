@@ -25,7 +25,6 @@ const ChatInput = ({ userInfo, roomId }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (textMessage && userInfo) {
-      console.log('Submit: ', textMessage);
       addDocument('messages', {
         text: textMessage,
         uid: userInfo.uid,
@@ -33,9 +32,10 @@ const ChatInput = ({ userInfo, roomId }) => {
         roomId,
         photoURL: userInfo.photoURL,
       });
-
       setTextMessage('');
+      return;
     }
+    toast.warning('❗Please enter your text message!');
   };
 
   const handleUploadFile = (e) => {
@@ -46,8 +46,6 @@ const ChatInput = ({ userInfo, roomId }) => {
       toast.warn('❗You can only share images!');
       return;
     }
-    console.log('image');
-    console.log({ file });
     saveImageMessage(file, roomId);
   };
 
