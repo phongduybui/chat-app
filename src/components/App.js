@@ -11,6 +11,8 @@ import ChatPage from '../pages/ChatPage';
 import LoginPage from '../pages/LoginPage';
 import Sidebar from './Sidebar';
 import RegisterPage from '../pages/RegisterPage';
+import UsersPage from '../pages/UsersPage';
+import SettingPage from '../pages/SettingPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,6 +49,8 @@ const App = () => {
             <Route>
               <Sidebar />
               <main>
+                <Route path='/setting' component={SettingPage} />
+                <Route path='/users' component={UsersPage} />
                 <Route path='/:roomId?' component={ChatPage} exact />
               </main>
               <ToastContainer position='bottom-right' autoClose={3000} />

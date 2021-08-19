@@ -1,0 +1,121 @@
+.SettingPage {
+  @include flex(row);
+  min-height: 100vh;
+  background: var(--background-color);
+
+  .setting {
+    min-width: 400px;
+    height: 100%;
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-secondary-color);
+  }
+
+  .setting__title {
+    color: var(--text-color);
+  }
+
+  .profile {
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .cover {
+    flex-grow: 1;
+    height: 100%;
+    color: var(--text-color);
+    background: var(--chat-box-background-color);
+    background-image: url('../assets/abtract-background.svg');
+    @include flexCenter(column);
+  }
+
+  .profile-info {
+    @include flexCenter(column);
+    background-color: var(--chat-box-background-color);
+    padding: 24px 12px;
+    border-radius: 6px;
+
+    .user-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .btn-logout {
+      @include flexCenter();
+      font-size: 14px;
+      color: var(--gray-bold);
+      padding: 8px;
+      border: 1px solid var(--gray-border);
+      border-radius: 4px;
+      svg {
+        margin-right: 6px;
+      }
+    }
+  }
+
+  form {
+    @include flexCenter(column);
+    margin-top: 12px;
+    padding: 24px 12px 0;
+    > * {
+      width: 100%;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .password-wrapper {
+      position: relative;
+
+      input {
+        margin-bottom: 0;
+      }
+      button {
+        @include flexCenter(column);
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        font-size: 20px;
+        transform: translateY(-50%);
+        color: var(--gray-bold);
+        cursor: pointer;
+      }
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline-color: var(--gray-border);
+      border: 1px solid var(--gray-border);
+      border-radius: 4px;
+      background-color: var(--input-color);
+      color: var(--text-color);
+      &::placeholder {
+        color: var(--gray-bold);
+      }
+    }
+
+    label {
+      margin-bottom: 4px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-color);
+    }
+
+    .btn-submit {
+      padding: 0 12px;
+      margin-bottom: 0;
+      border-radius: 4px;
+      background-color: var(--primary-color);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      min-height: 42px;
+    }
+  }
+}
