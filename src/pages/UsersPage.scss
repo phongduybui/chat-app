@@ -1,0 +1,97 @@
+.UsersPage {
+  @include flex(row);
+  min-height: 100vh;
+  background: var(--background-color);
+
+  .users {
+    min-width: 400px;
+    height: 100%;
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-secondary-color);
+  }
+
+  .users__title {
+    color: var(--text-color);
+  }
+
+  .user-detail {
+    flex-grow: 1;
+    height: 100%;
+    color: var(--text-color);
+    background: var(--chat-box-background-color);
+    background-image: url('../assets/abtract-background.svg');
+    @include flexCenter(column);
+
+    .action {
+      @include flex(row);
+      button {
+        @include flexCenter();
+        & + button {
+          margin-left: 24px;
+        }
+        padding: 16px;
+        border-radius: 50%;
+        background-color: #56bda7;
+      }
+      svg {
+        color: #fff;
+        font-size: 26px;
+      }
+    }
+
+    .user-name {
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+
+    .user-created-at {
+      font-size: 16px;
+    }
+  }
+
+  .user-list {
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .user-item {
+    .letter {
+      color: var(--primary-color);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .user {
+      @include flex(row);
+      padding: 12px;
+      border: 1px solid var(--gray-border);
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--input-color);
+      }
+
+      + .user {
+        margin-top: 12px;
+      }
+
+      .Avatar__wrapper {
+        align-self: center;
+      }
+
+      h3,
+      h5 {
+        margin: 6px 10px;
+      }
+
+      .text-secondary {
+        font-size: 11px;
+      }
+    }
+  }
+}
