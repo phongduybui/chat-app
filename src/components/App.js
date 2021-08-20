@@ -53,10 +53,10 @@ const App = () => {
                 <Route path='/users' component={UsersPage} />
                 <Route path='/:roomId?' component={ChatPage} exact />
               </main>
-              <ToastContainer position='bottom-right' autoClose={3000} />
             </Route>
           </Switch>
         )}
+        <ToastContainer position='bottom-right' autoClose={3000} />
       </div>
     </Router>
   );

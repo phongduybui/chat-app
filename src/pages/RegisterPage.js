@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createUser } from '../redux/slices/userSlice';
+import { toast } from 'react-toastify';
 
 const RegisterPage = ({ history }) => {
   const [name, setName] = useState('');
@@ -20,6 +21,8 @@ const RegisterPage = ({ history }) => {
       setName('');
       setEmail('');
       setPassword('');
+    } else {
+      toast.warn('Please enter required field!');
     }
   };
 

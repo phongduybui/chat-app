@@ -5,6 +5,7 @@ import {
   signInWithEmail,
 } from '../firebase/services';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -28,6 +29,8 @@ const LoginPage = ({ history }) => {
         .finally(() => {
           setLoading(false);
         });
+    } else {
+      toast.warn('Please enter required field!');
     }
   };
 

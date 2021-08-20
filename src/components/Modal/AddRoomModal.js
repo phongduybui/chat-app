@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { addDocument } from '../../firebase/services';
 import { toast } from 'react-toastify';
@@ -12,11 +13,11 @@ const AddRoomModal = (props) => {
 
   const { userInfo } = useSelector((state) => state.user);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (name.trim() && desc.trim()) {
-      addDocument('rooms', {
+      const roomId = await addDocument('rooms', {
         name,
         desc,
         members: [userInfo?.uid],
@@ -25,7 +26,14 @@ const AddRoomModal = (props) => {
       setDesc('');
       setMessage('');
       props.onClose();
-      toast.dark('✔️ Successfully add chat room!');
+      toast.dark(
+        <p>
+          ✔️ Successfully!{' '}
+          <Link style={{ color: 'lightseagreen' }} to={`/${roomId}`}>
+            Go to your room!'
+          </Link>
+        </p>
+      );
       return;
     }
     setMessage('Something wrong! Please enter required fields!');
