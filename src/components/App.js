@@ -49,9 +49,11 @@ const App = () => {
             <Route>
               <Sidebar />
               <main>
-                <Route path='/setting' component={SettingPage} />
-                <Route path='/users' component={UsersPage} />
-                <Route path='/:roomId?' component={ChatPage} exact />
+                <Switch>
+                  <Route path='/setting' component={SettingPage} exact />
+                  <Route path='/users' component={UsersPage} exact />
+                  <Route path='/:roomId?' component={ChatPage} exact />
+                </Switch>
               </main>
             </Route>
           </Switch>

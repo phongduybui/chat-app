@@ -3,13 +3,17 @@ import SearchUsersBox from '../components/SearchUsersBox';
 import Avatar from '../components/Avatar';
 import { ReactComponent as Logo } from '../assets/icons/logo.svg';
 import { BiMessageRoundedDots, BiPhoneCall } from 'react-icons/bi';
+import { AiOutlineMessage } from 'react-icons/ai';
 import { db } from '../firebase/config';
 import { addDocument } from '../firebase/services';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import format from 'date-fns/format';
 import history from '../history';
+import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 
 const UsersPage = () => {
+  const dispatch = useDispatch();
+
   const [userList, setUserList] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [userSelected, setUserSelected] = useState(null);
@@ -22,7 +26,7 @@ const UsersPage = () => {
     setUserSelected(selectUser);
   };
 
-  const handleMessageBtnClick = async (desUser) => {
+  const handleMessageBtnClick = async (desUser, onMobile) => {
     setLoading(true);
     const blackListRooms = [
       `${desUser.uid}${userInfo?.uid}`,
@@ -45,6 +49,9 @@ const UsersPage = () => {
       privateRoomId: [desUser.uid, userInfo?.uid].join(''),
     });
     setLoading(false);
+    if (onMobile) {
+      dispatch(setChatScreenMobile('chat-content'));
+    }
     history.push(`/${roomId}`);
   };
 
@@ -111,12 +118,18 @@ const UsersPage = () => {
                       key={user.uid}
                     >
                       <Avatar src={user.photoURL} size={36} />
-                      <div>
+                      <div className='wrapper-info'>
                         <h3 className='text-primary'>{user.displayName}</h3>
                         <h5 className='text-secondary'>
                           {user.email || user.providerId}
                         </h5>
                       </div>
+                      <button
+                        className='btn-message'
+                        onClick={() => handleMessageBtnClick(user, true)}
+                      >
+                        <AiOutlineMessage />
+                      </button>
                     </div>
                   ))}
                 </div>

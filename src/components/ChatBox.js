@@ -8,6 +8,8 @@ import InviteUserModal from './Modal/InviteUserModal';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import { db } from '../firebase/config';
 import { setMessages } from '../redux/slices/messageSlice';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 
 const ChatBox = () => {
   const match = useRouteMatch();
@@ -19,6 +21,16 @@ const ChatBox = () => {
   const selectedRoom = roomList.find((r) => r?.id === match.params.roomId);
 
   const ref = useRef(null);
+
+  const handleShowChatInfo = () => {
+    dispatch(setChatScreenMobile('chat-info'));
+    const btnShowInfo = document.querySelector(
+      'div.CollapsibleBar.ChatPage__shared-files.collapse > div.CollapsibleBar__title > button'
+    );
+    if (btnShowInfo) {
+      btnShowInfo.click();
+    }
+  };
 
   useEffect(() => {
     let collectionRef = db.collection('messages').orderBy('createdAt');
@@ -53,14 +65,30 @@ const ChatBox = () => {
       {selectedRoom ? (
         <>
           <div className='ChatBox__title'>
-            <h2 className='h1'>{selectedRoom?.name}</h2>
-            <button
-              onClick={() => setOpenInviteModal(true)}
-              className='ChatBox__btn'
-            >
-              <AiOutlineUsergroupAdd />
-              <span>Invite</span>
-            </button>
+            <div className='wrapper-btn wrapper-btn--left'>
+              <button
+                className='btn-change-screen'
+                onClick={() => dispatch(setChatScreenMobile('chat-list'))}
+              >
+                <FiChevronLeft />
+              </button>
+              <h2 className='h1'>{selectedRoom?.name}</h2>
+            </div>
+            <div className='wrapper-btn'>
+              <button
+                onClick={() => setOpenInviteModal(true)}
+                className='ChatBox__btn'
+              >
+                <AiOutlineUsergroupAdd />
+                <span>Invite</span>
+              </button>
+              <button
+                onClick={handleShowChatInfo}
+                className='btn-change-screen'
+              >
+                <FiChevronRight />
+              </button>
+            </div>
           </div>
 
           <div className='ChatBox__wrapper-content'>

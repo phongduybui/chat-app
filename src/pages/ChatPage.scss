@@ -1,9 +1,26 @@
 .ChatPage {
-  @include flex('row', 'flex-start', 'flex-start', 'nowrap');
+  // @include flex('row', 'flex-start', 'flex-start', 'nowrap');
+  display: flex;
   background-color: var(--background-secondary-color);
 
   &__user {
     padding: spacing(2);
+    transition: all 0.4s;
+    @include breakpointDown($md) {
+      &.chat-content {
+        transform: translateX(-100%);
+        display: none;
+      }
+      &.chat-list {
+        transform: translateX(0);
+        min-width: 100%;
+        width: 100%;
+      }
+      &.chat-info {
+        transform: translateX(-100%);
+        display: none;
+      }
+    }
 
     // Style apply to child when bar collapse
     &.collapse {
@@ -46,6 +63,12 @@
             }
           }
         }
+      }
+    }
+
+    & .CollapsibleBar__title {
+      @include breakpointDown($md) {
+        display: none;
       }
     }
 
@@ -112,11 +135,46 @@
 
   &__chat-box {
     flex-grow: 1;
+    transition: all 0.4s;
+    @include breakpointDown($md) {
+      &.chat-content {
+        transform: translateX(0);
+        min-width: 100%;
+        width: 100%;
+      }
+      &.chat-list {
+        transform: translateX(120%);
+        display: none;
+      }
+      &.chat-info {
+        transform: translateX(120%);
+        display: none;
+      }
+    }
   }
 
   &__shared-files {
     display: flex;
     flex-direction: column;
+    transition: all 0.4s;
+    @include breakpointDown($md) {
+      & .CollapsibleBar__title {
+        display: none;
+      }
+      &.chat-content {
+        transform: translateX(-120%);
+        display: none;
+      }
+      &.chat-list {
+        transform: translateX(-100%);
+        display: none;
+      }
+      &.chat-info {
+        transform: translateX(0);
+        min-width: 100%;
+        width: 100%;
+      }
+    }
 
     .CollapsibleBar__content {
       overflow: auto;
@@ -160,8 +218,14 @@
     }
 
     .type {
-      @include flex(row, space-between);
       color: var(--primary-color);
+      @include flex(row, space-between);
+      @include breakpointDown($md) {
+        justify-content: center;
+        .type__wrapper {
+          margin: 0 12px;
+        }
+      }
 
       svg {
         font-size: 26px;
@@ -275,6 +339,44 @@
     .CollapsibleBar__title > span {
       font-size: 16px;
       white-space: nowrap;
+    }
+  }
+
+  .btn-change-screen {
+    @include breakpointUp($md) {
+      display: none;
+    }
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--gray-soft);
+    margin-right: 12px;
+    svg {
+      font-size: 18px;
+      color: var(--gray-bold);
+    }
+  }
+
+  .wrapper-btn {
+    display: flex;
+    align-items: center;
+    @include breakpointDown($md) {
+      &--left {
+        flex-grow: 1;
+        flex-basis: 50%;
+        max-width: 50%;
+
+        h2 {
+          flex-basis: 100%;
+          max-width: 100%;
+          font-size: 15px;
+        }
+      }
+
+      .ChatBox__btn {
+        font-size: 15px;
+        font-weight: 400;
+        padding: 8px 6px;
+      }
     }
   }
 }

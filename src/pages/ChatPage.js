@@ -21,6 +21,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import { formatDateToNow } from '../utils/formatDate';
 import { db } from '../firebase/config';
+import clsx from 'clsx';
+import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
+import { FiChevronLeft } from 'react-icons/fi';
 
 const ChatPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ const ChatPage = ({ match }) => {
   const { roomList, selectedRoom, roomMembers, roomImages } = useSelector(
     (state) => state.rooms
   );
+  const { screen } = useSelector((state) => state.chatScreen);
 
   useEffect(() => {
     let collectionRef = db.collection('rooms').orderBy('createdAt');
@@ -78,7 +82,7 @@ const ChatPage = ({ match }) => {
         defaultState={false}
         direction='left'
         title='Chat'
-        className='ChatPage__user'
+        className={clsx('ChatPage__user', screen)}
       >
         <div className='user'>
           <Avatar size={70} userState={userState} src={userInfo?.photoURL} />
@@ -114,15 +118,21 @@ const ChatPage = ({ match }) => {
           </div>
         </div>
       </CollapsibleBar>
-      <div className='ChatPage__chat-box'>
+      <div className={clsx('ChatPage__chat-box', screen)}>
         <ChatBox />
       </div>
       <CollapsibleBar
         defaultState={true}
         direction='right'
         title='Shared Files'
-        className='ChatPage__shared-files'
+        className={clsx('ChatPage__shared-files', screen)}
       >
+        <button
+          className='btn-change-screen'
+          onClick={() => dispatch(setChatScreenMobile('chat-content'))}
+        >
+          <FiChevronLeft />
+        </button>
         <div className='user'>
           {roomMembers.length > 2 ? (
             <AvatarGroup>

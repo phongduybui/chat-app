@@ -23,6 +23,9 @@
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     font-size: 16px;
     @include flex(column, flex-start, center);
+    @include breakpointDown($sm) {
+      width: 340px;
+    }
 
     & > * {
       width: 100%;

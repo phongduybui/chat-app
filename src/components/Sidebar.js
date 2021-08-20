@@ -26,7 +26,7 @@ const Sidebar = () => {
             <BiChat />
           </NavLink>
         </li>
-        <li className='nav__item sm-hide'>
+        <li className='nav__item'>
           <NavLink to='/users' className='nav__link'>
             <BiGroup />
           </NavLink>
@@ -41,7 +41,7 @@ const Sidebar = () => {
             <BiCog />
           </NavLink>
         </li>
-        <li className='nav__item'>
+        <li className='nav__item md-hide'>
           <button className='nav__link' onClick={signOut} title='Sign Out'>
             <BiLogOut />
           </button>

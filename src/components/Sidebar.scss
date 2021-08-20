@@ -9,16 +9,16 @@
   z-index: 999;
   @include flex(column, space-between, center);
 
-  @include breakpointDown($sm) {
+  @include breakpointDown($md) {
     top: unset;
     width: 100%;
-    background-color: var(--primary-color-background);
+    background-color: var(--chat-box-background-color);
   }
 
   & .brand {
     margin-top: spacing(3);
     @include flexCenter(row);
-    @include breakpointDown($sm) {
+    @include breakpointDown($md) {
       display: none;
     }
   }
@@ -27,14 +27,14 @@
     list-style: none;
     padding: 0;
     @include flexCenter(column);
-    @include breakpointDown($sm) {
+    @include breakpointDown($md) {
       margin: 0;
       width: 100%;
       flex-direction: row;
       justify-content: space-around;
       padding: 0 16px;
 
-      & .sm-hide {
+      & .md-hide {
         display: none;
       }
     }
@@ -54,7 +54,7 @@
         border-right: 3px solid var(--primary-color);
       }
 
-      @include breakpointDown($sm) {
+      @include breakpointDown($md) {
         &.active::before {
           display: none;
         }
@@ -75,7 +75,7 @@
 
   & .user {
     margin-bottom: spacing(2);
-    @include breakpointDown($sm) {
+    @include breakpointDown($md) {
       display: none;
     }
   }

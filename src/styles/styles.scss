@@ -1,17 +1,17 @@
 // Reset css
 @import './normalize';
 
-// Typography and font-face
-@import './typography';
-
-// Global customize css
-@import './global';
-
 // Contain global variables
 @import './variables';
 
 // Contain all scss mixins
 @import './mixins';
+
+// Typography and font-face
+@import './typography';
+
+// Global customize css
+@import './global';
 
 // Contain all scss function
 @import './functions';

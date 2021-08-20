@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import history from '../history';
+import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 import { setSelectedRoom } from '../redux/slices/roomSlice';
 import Avatar from './Avatar';
 
@@ -13,6 +14,7 @@ const ChatPreviewItem = ({ id, name, latestMessage, time, desc }) => {
     if (id) {
       const selectedRoom = roomList.find((r) => r.id === id);
       dispatch(setSelectedRoom(selectedRoom || ''));
+      dispatch(setChatScreenMobile('chat-content'));
       history.push(`/${id}`);
     }
   };

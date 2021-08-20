@@ -27,6 +27,11 @@
     word-break: break-all;
     white-space: normal;
 
+    @include breakpointDown($md) {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
     > a {
       color: var(--link-color);
     }
@@ -41,6 +46,12 @@
     .image-message {
       object-fit: cover;
       max-width: 200px;
+      @include breakpointDown($md) {
+        max-width: 170px;
+      }
+      @include breakpointDown($sm) {
+        max-width: 145px;
+      }
     }
 
     &--first {

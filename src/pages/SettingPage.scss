@@ -5,6 +5,9 @@
 
   .setting {
     min-width: 400px;
+    @include breakpointDown($md) {
+      min-width: 100%;
+    }
     height: 100%;
     padding: 16px 22px;
     display: flex;
@@ -30,6 +33,9 @@
     background: var(--chat-box-background-color);
     background-image: url('../assets/abtract-background.svg');
     @include flexCenter(column);
+    @include breakpointDown($md) {
+      display: none;
+    }
   }
 
   .profile-info {
