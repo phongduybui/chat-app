@@ -4,6 +4,7 @@ import { fetchUserList } from '../../firebase/services';
 import { toast } from 'react-toastify';
 import Avatar from '../Avatar';
 import Modal from './Modal';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const InviteUserModal = ({ currentMembers, ...props }) => {
   const [term, setTerm] = useState('');
@@ -63,22 +64,7 @@ const InviteUserModal = ({ currentMembers, ...props }) => {
     }
   }, [debouncedTerm, currentMembers]);
 
-  useEffect(() => {
-    const onBodyClick = (event) => {
-      if (
-        selectBoxRef.current &&
-        !selectBoxRef.current.contains(event.target)
-      ) {
-        setIsVisibleSelectBox(false);
-      }
-    };
-
-    // Them {capture: true} de chay dc
-    document.addEventListener('click', onBodyClick, { capture: true });
-
-    return () =>
-      document.removeEventListener('click', onBodyClick, { capture: true });
-  }, []);
+  useClickOutside(selectBoxRef, () => setIsVisibleSelectBox(false));
 
   return (
     <Modal {...props} header='Invite your friends'>

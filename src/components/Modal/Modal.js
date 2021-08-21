@@ -1,23 +1,11 @@
 import React, { useRef } from 'react';
-import { useEffect } from 'react';
+import useClickOutside from '../../hooks/useClickOutside';
 import ReactDOM from 'react-dom';
 
 const Modal = ({ children, open, onClose, header }) => {
   const ref = useRef(null);
 
-  useEffect(() => {
-    const onBodyClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
-    // Them {capture: true} de chay dc
-    document.addEventListener('click', onBodyClick, { capture: true });
-
-    return () =>
-      document.removeEventListener('click', onBodyClick, { capture: true });
-  }, [onClose]);
+  useClickOutside(ref, onClose);
 
   return (
     open &&
