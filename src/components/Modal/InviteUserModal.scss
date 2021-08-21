@@ -1,6 +1,9 @@
 .InviteUserModal {
   background: var(--background-secondary-color);
   width: 400px;
+  @include breakpointDown($sm) {
+    width: $modal-sm-width;
+  }
 
   .content {
     position: relative;
