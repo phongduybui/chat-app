@@ -1,12 +1,15 @@
 import React from 'react';
+import Modal from './Modal';
+import history from '../../history';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addDocument } from '../../firebase/services';
 import { toast } from 'react-toastify';
-import Modal from './Modal';
+import { setChatScreenMobile } from '../../redux/slices/chatScreenSlice';
 
 const AddRoomModal = (props) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [message, setMessage] = useState('');
@@ -34,6 +37,8 @@ const AddRoomModal = (props) => {
           </Link>
         </p>
       );
+      dispatch(setChatScreenMobile('chat-content'));
+      history.push(`/${roomId}`);
       return;
     }
     setMessage('Something wrong! Please enter required fields!');

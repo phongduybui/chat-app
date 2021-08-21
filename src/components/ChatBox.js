@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatInput from './ChatInput';
 import Message from './Message';
+import InviteUserModal from './Modal/InviteUserModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineUsergroupAdd, AiOutlineInfoCircle } from 'react-icons/ai';
 import { useRouteMatch } from 'react-router';
-import InviteUserModal from './Modal/InviteUserModal';
 import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
-import { db } from '../firebase/config';
 import { setMessages } from '../redux/slices/messageSlice';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
+import { Link } from 'react-router-dom';
+import { db } from '../firebase/config';
 
 const ChatBox = () => {
   const match = useRouteMatch();
@@ -105,9 +106,15 @@ const ChatBox = () => {
           <div className='tooltip__content'>
             <AiOutlineInfoCircle />
             <span>
-              Please select a room or{' '}
+              Please{' '}
+              <button
+                onClick={() => dispatch(setChatScreenMobile('chat-list'))}
+              >
+                select a room
+              </button>{' '}
+              or{' '}
               <button onClick={() => dispatch(setRoomModalVisible(true))}>
-                create a new chat room here!
+                create a new chat room!
               </button>
             </span>
           </div>
