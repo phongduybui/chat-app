@@ -24,6 +24,7 @@ import { db } from '../firebase/config';
 import clsx from 'clsx';
 import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 import { FiChevronLeft } from 'react-icons/fi';
+import MemberItem from '../components/MemberItem';
 
 const ChatPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -158,15 +159,12 @@ const ChatPage = ({ match }) => {
           <div className='members'>
             <Accordion title='Members'>
               {roomMembers.map((mem, index) => (
-                <div className='member-wrapper' key={mem?.uid || index}>
-                  <div className='member-info'>
-                    <Avatar size={28} src={mem?.photoURL} />
-                    <span className='member-name'>{mem?.displayName}</span>
-                  </div>
-                  <span className='member-action'>
-                    <BiDotsVerticalRounded fontSize={18} />
-                  </span>
-                </div>
+                <MemberItem
+                  key={mem?.uid || index}
+                  photoURL={mem?.photoURL}
+                  displayName={mem?.displayName}
+                  memUID={mem?.uid}
+                />
               ))}
             </Accordion>
           </div>

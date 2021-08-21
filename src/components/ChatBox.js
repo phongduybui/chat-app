@@ -9,7 +9,6 @@ import { setRoomModalVisible } from '../redux/slices/roomModalSlice';
 import { setMessages } from '../redux/slices/messageSlice';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
-import { Link } from 'react-router-dom';
 import { db } from '../firebase/config';
 
 const ChatBox = () => {

@@ -1,0 +1,37 @@
+.member-wrapper {
+  @include flex(row, space-between, center);
+  padding: 8px 0px;
+
+  .member-info {
+    @include flexCenter();
+    font-size: 14px;
+
+    .member-name {
+      margin-left: 8px;
+      color: var(--text-color);
+    }
+  }
+  .member-action {
+    color: var(--gray-bold);
+    cursor: pointer;
+  }
+
+  .action-wrapper {
+    position: relative;
+
+    .btn-remove-mem {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      padding: 6px 8px;
+      font-size: 13px;
+      background: #ddd;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      display: none;
+    }
+    .btn-remove-mem.visible {
+      display: block;
+    }
+  }
+}

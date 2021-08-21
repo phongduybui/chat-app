@@ -216,24 +216,6 @@
 
       .members {
         width: 100%;
-
-        .member-wrapper {
-          @include flex(row, space-between, center);
-          padding: 8px 0px;
-        }
-        .member-info {
-          @include flexCenter();
-          font-size: 14px;
-
-          .member-name {
-            margin-left: 8px;
-            color: var(--text-color);
-          }
-        }
-        .member-action {
-          color: var(--gray-bold);
-          cursor: pointer;
-        }
       }
     }
 
