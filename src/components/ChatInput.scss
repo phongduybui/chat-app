@@ -25,6 +25,9 @@
       color: var(--gray-bold);
       font-weight: 400;
       font-size: 15px;
+      @include breakpointDown($md) {
+        font-size: 13.5px;
+      }
     }
   }
 

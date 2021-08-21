@@ -59,7 +59,11 @@ const UsersPage = () => {
     const getUsers = () => {
       let usersRef = db.collection('users');
       if (keyword) {
-        usersRef = usersRef.where('keywords', 'array-contains', keyword);
+        usersRef = usersRef.where(
+          'keywords',
+          'array-contains',
+          keyword.toLowerCase()
+        );
       }
       usersRef
         .get()

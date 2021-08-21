@@ -7,6 +7,7 @@
     padding: spacing(2);
     transition: all 0.4s;
     @include breakpointDown($md) {
+      height: calc(100vh - #{$bottom-nav-height});
       &.chat-content {
         transform: translateX(-100%);
         display: none;
@@ -156,8 +157,10 @@
   &__shared-files {
     display: flex;
     flex-direction: column;
+    background-color: var(--background-secondary-color);
     transition: all 0.4s;
     @include breakpointDown($md) {
+      height: 100vh;
       & .CollapsibleBar__title {
         display: none;
       }
@@ -359,23 +362,25 @@
   .wrapper-btn {
     display: flex;
     align-items: center;
-    @include breakpointDown($md) {
-      &--left {
-        flex-grow: 1;
-        flex-basis: 50%;
-        max-width: 50%;
+    &--left {
+      flex-grow: 1;
+      flex-basis: 50%;
+      max-width: 50%;
 
-        h2 {
-          flex-basis: 100%;
-          max-width: 100%;
-          font-size: 15px;
-        }
+      h2 {
+        flex-basis: 100%;
+        max-width: 100%;
       }
-
+    }
+    @include breakpointDown($md) {
+      &--left h2 {
+        font-size: 15px;
+      }
       .ChatBox__btn {
         font-size: 15px;
         font-weight: 400;
         padding: 8px 6px;
+        margin-right: 8px;
       }
     }
   }

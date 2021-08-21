@@ -1,6 +1,7 @@
 .UsersPage {
   @include flex(row);
-  min-height: 100vh;
+  min-height: calc(100vh - #{$bottom-nav-height});
+  height: calc(100vh - #{$bottom-nav-height}) !important;
   background: var(--background-color);
 
   .users {
@@ -98,6 +99,11 @@
       .text-secondary {
         font-size: 11px;
       }
+    }
+  }
+  .btn-message {
+    @include breakpointUp($md) {
+      display: none;
     }
   }
 }

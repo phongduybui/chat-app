@@ -1,12 +1,16 @@
 .ChatBox {
-  // position: relative;
   background-color: var(--chat-box-background-color);
   height: calc(100% - 32px);
   margin: 16px 8px;
   padding: 0 16px;
   border-radius: 12px;
   overflow: hidden;
-  // @include flex(column, space-between, flex-start);
+  @include breakpointDown($md) {
+    height: 100%;
+    margin: 0;
+    padding: 0 16px;
+    border-radius: 0;
+  }
 
   & > * {
     width: 100%;

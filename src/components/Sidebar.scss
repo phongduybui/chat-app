@@ -79,4 +79,10 @@
       display: none;
     }
   }
+
+  @include breakpointDown($md) {
+    &.hidden {
+      display: none;
+    }
+  }
 }

@@ -18,12 +18,6 @@
   .App {
     main {
       margin-left: 0;
-      min-height: calc(100vh - #{$bottom-nav-height});
-      height: calc(100vh - #{$bottom-nav-height});
-      & > div {
-        min-height: calc(100vh - #{$bottom-nav-height});
-        height: calc(100vh - #{$bottom-nav-height});
-      }
     }
   }
 }

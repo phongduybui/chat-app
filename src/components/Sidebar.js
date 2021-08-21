@@ -5,16 +5,18 @@ import { BiChat, BiGroup, BiCog, BiMoon, BiLogOut } from 'react-icons/bi';
 import Avatar from './Avatar';
 import { signOut } from '../firebase/services';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 const Sidebar = () => {
   const { userInfo } = useSelector((state) => state.user);
+  const { screen } = useSelector((state) => state.chatScreen);
 
   const handleThemeToggle = () => {
     document?.body?.classList.toggle('dark-mode');
   };
 
   return (
-    <aside className='Sidebar'>
+    <aside className={clsx('Sidebar', screen !== 'chat-list' && 'hidden')}>
       <div className='brand'>
         <NavLink to='/'>
           <Logo width={22} height={22} />

@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   screen: 'chat-list',
+  // screen === 'chat-list' || 'chat-content' || 'chat-info'
+  //(3 sections on ChatPage)
 };
 
 export const chatScreenSlice = createSlice({

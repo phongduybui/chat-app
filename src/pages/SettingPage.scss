@@ -1,6 +1,7 @@
 .SettingPage {
   @include flex(row);
-  min-height: 100vh;
+  min-height: calc(100vh - #{$bottom-nav-height});
+  height: calc(100vh - #{$bottom-nav-height}) !important;
   background: var(--background-color);
 
   .setting {
