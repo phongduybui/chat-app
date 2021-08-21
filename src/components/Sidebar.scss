@@ -63,8 +63,13 @@
       &.active,
       &:hover {
         color: var(--primary-color);
-        background-color: var(--primary-color-background);
+        background-color: var(--nav-link-hover-color);
         border-radius: $btn-border-radius;
+      }
+
+      &.toggle-theme {
+        background-color: transparent;
+        color: var(--gray-bold);
       }
 
       & > svg {

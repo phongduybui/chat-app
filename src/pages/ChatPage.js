@@ -84,27 +84,29 @@ const ChatPage = ({ match }) => {
         title='Chat'
         className={clsx('ChatPage__user', screen)}
       >
-        <div className='user'>
-          <Avatar size={70} userState={userState} src={userInfo?.photoURL} />
-          <span className='user__name title'>{userInfo?.displayName}</span>
-          <select
-            className='user__state'
-            value={userState}
-            onChange={(e) => setUserState(e.target.value)}
-          >
-            <option value='available'>available</option>
-            <option value='offline'>offline</option>
-            <option value='busy'>busy</option>
-          </select>
-        </div>
-        <SearchBox uid={userInfo?.uid} />
-        <div className='user__last-chats'>
+        <div>
+          <div className='user'>
+            <Avatar size={70} userState={userState} src={userInfo?.photoURL} />
+            <span className='user__name title'>{userInfo?.displayName}</span>
+            <select
+              className='user__state'
+              value={userState}
+              onChange={(e) => setUserState(e.target.value)}
+            >
+              <option value='available'>available</option>
+              <option value='offline'>offline</option>
+              <option value='busy'>busy</option>
+            </select>
+          </div>
+          <SearchBox uid={userInfo?.uid} />
           <div className='title'>
             <span>Last chats</span>
             <button onClick={() => dispatch(setRoomModalVisible(true))}>
               <BiMessageAdd fontSize={18} />
             </button>
           </div>
+        </div>
+        <div className='user__last-chats'>
           <div className='list-chat'>
             {roomList.map((room, index) => (
               <ChatPreviewItem

@@ -7,7 +7,8 @@
     padding: spacing(2);
     transition: all 0.4s;
     @include breakpointDown($md) {
-      height: calc(100vh - #{$bottom-nav-height});
+      // height: calc(100vh - #{$bottom-nav-height});
+      height: calc(100% - #{$bottom-nav-height});
       &.chat-content {
         transform: translateX(-100%);
         display: none;
@@ -44,11 +45,12 @@
         .SearchBox {
           display: none;
         }
+        .title {
+          display: none;
+        }
         .user__last-chats {
           margin-top: 0;
-          .title {
-            display: none;
-          }
+
           .list-chat {
             transition: all 0.2s;
             border-top: 1px solid var(--gray-border);
@@ -73,17 +75,31 @@
       }
     }
 
-    // Trick for show child div scrollable (css apply to parent)
     display: flex;
     flex-direction: column;
     overflow: hidden;
 
-    // Trick for show child div scrollable (css apply to child)
     & .CollapsibleBar__content {
+      // Trick for show child div scrollable (css apply to parent)
       overflow: auto;
+      display: flex;
+      flex-direction: column;
+    }
 
-      &::-webkit-scrollbar {
-        display: none;
+    .title {
+      @include flex(row, space-between, center);
+
+      > span {
+        font-size: 14px;
+        color: var(--gray-bold);
+      }
+
+      > button {
+        @include flexCenter();
+        background-color: var(--primary-color-background);
+        color: var(--primary-color);
+        padding: 6px;
+        border-radius: $btn-border-radius;
       }
     }
 
@@ -110,21 +126,10 @@
 
       &__last-chats {
         margin: spacing(1) 0;
-        .title {
-          @include flex(row, space-between, center);
-
-          > span {
-            font-size: 14px;
-            color: var(--gray-bold);
-          }
-
-          > button {
-            @include flexCenter();
-            background-color: var(--primary-color-background);
-            color: var(--primary-color);
-            padding: 6px;
-            border-radius: $btn-border-radius;
-          }
+        // Trick for show child div scrollable (css apply to child)
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          display: none;
         }
 
         .list-chat {
@@ -160,7 +165,8 @@
     background-color: var(--background-secondary-color);
     transition: all 0.4s;
     @include breakpointDown($md) {
-      height: 100vh;
+      // height: 100vh;
+      height: 100%;
       & .CollapsibleBar__title {
         display: none;
       }

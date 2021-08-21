@@ -29,6 +29,10 @@
 
     @include breakpointDown($md) {
       padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    @include breakpointDown($sm) {
       font-size: 13px;
     }
 

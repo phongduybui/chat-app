@@ -34,7 +34,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className='nav__item'>
-          <button className='nav__link' onClick={handleThemeToggle}>
+          <button className='nav__link toggle-theme' onClick={handleThemeToggle}>
             <BiMoon />
           </button>
         </li>

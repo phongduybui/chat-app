@@ -47,25 +47,17 @@
 .text-primary {
   font-size: 14px;
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: 500;
   @include breakpointDown($md) {
     font-size: 13px;
-  }
-  @include breakpointDown($sm) {
-    font-size: 12px;
-    font-weight: 500;
   }
 }
 
 .text-secondary {
   font-size: 13px;
-  color: var(--gray-bold);
+  color: var(--text-secondary);
   font-weight: 400;
   @include breakpointDown($md) {
     font-size: 12px;
-  }
-  @include breakpointDown($sm) {
-    font-size: 10px;
-    font-weight: 400;
   }
 }
