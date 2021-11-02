@@ -9,7 +9,6 @@ import AddRoomModal from '../components/Modal/AddRoomModal';
 import AvatarGroup from '../components/AvatarGroup';
 import Accordion from '../components/Accordion';
 import {
-  fetchImagesShared,
   fetchMembersInRoom,
   setRooms,
   setSelectedRoom,
@@ -30,7 +29,11 @@ import clsx from 'clsx';
 import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 import { FiChevronLeft } from 'react-icons/fi';
 import MemberItem from '../components/MemberItem';
-import { getLinkMessages } from '../utils/getLinkMessages';
+import {
+  getLinkMessages,
+  getVideoMessages,
+  getImageMessages,
+} from '../utils/getMessages';
 
 const ChatPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -39,11 +42,13 @@ const ChatPage = ({ match }) => {
   const { userInfo } = useSelector((state) => state.user);
   const { messages } = useSelector((state) => state.message);
   const { isVisible } = useSelector((state) => state.isAddRoomVisible);
-  const { roomList, selectedRoom, roomMembers, roomImages } = useSelector(
+  const { roomList, selectedRoom, roomMembers } = useSelector(
     (state) => state.rooms
   );
   const { screen } = useSelector((state) => state.chatScreen);
   const linkMessages = getLinkMessages(messages);
+  const videoMessages = getVideoMessages(messages);
+  const imageMessages = getImageMessages(messages);
 
   useEffect(() => {
     let collectionRef = db.collection('rooms').orderBy('createdAt');
@@ -77,12 +82,6 @@ const ChatPage = ({ match }) => {
       dispatch(fetchMembersInRoom());
     }
   }, [dispatch, match.params.roomId, roomList]);
-
-  useEffect(() => {
-    if (match.params.roomId) {
-      dispatch(fetchImagesShared({ roomId: match.params.roomId }));
-    }
-  }, [dispatch, match.params.roomId, messages]);
 
   return (
     <div className='ChatPage'>
@@ -181,7 +180,9 @@ const ChatPage = ({ match }) => {
             <BsFillFolderFill />
             <div className='type__info'>
               <span className='type__title'>All files</span>
-              <span className='type__qty'>{roomImages.length}</span>
+              <span className='type__qty'>
+                {imageMessages.length + videoMessages.length}
+              </span>
             </div>
           </div>
           <div className='type__wrapper'>
@@ -202,18 +203,22 @@ const ChatPage = ({ match }) => {
           <FileType
             type='Photos'
             Icon={<AiFillPicture />}
-            qty={roomImages.length}
+            qty={imageMessages.length}
             color='#CCBA89'
           >
-            {roomImages.map((imgUrl) => (
+            {imageMessages.map((imageMessage) => (
               <a
-                href={imgUrl}
+                href={imageMessage?.mediaUrl}
                 download
                 target='_blank'
                 rel='noreferrer'
-                key={imgUrl}
+                key={imageMessage?.id}
               >
-                <img src={imgUrl} className='room-images' alt='' />
+                <img
+                  src={imageMessage?.mediaUrl}
+                  className='room-images'
+                  alt=''
+                />
               </a>
             ))}
           </FileType>
@@ -242,9 +247,20 @@ const ChatPage = ({ match }) => {
           <FileType
             type='Videos'
             Icon={<AiFillPlaySquare />}
-            qty={0}
+            qty={videoMessages.length}
             color='#F6A9A9'
-          />
+          >
+            {videoMessages.map((videoMessage) => (
+              <video
+                className='room-video'
+                controls
+                src={videoMessage?.mediaUrl}
+                key={videoMessage?.id}
+              >
+                Video does not support!
+              </video>
+            ))}
+          </FileType>
         </div>
       </CollapsibleBar>
       <AddRoomModal

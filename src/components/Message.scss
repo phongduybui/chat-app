@@ -58,6 +58,14 @@
       }
     }
 
+    .video-message {
+      width: 200px;
+      height: 130px;
+      @include breakpointDown($md) {
+        width: 150px;
+      }
+    }
+
     &--first {
       $triangle-width: 10px;
       border-bottom-left-radius: unset;

@@ -171,21 +171,21 @@ export const fetchUserByUID = async (userId) => {
 const LOADING_IMAGE_URL =
   'https://media.giphy.com/media/7VDiGv55B4IX8CHdJU/source.gif';
 
-// Saves a new message containing an image in Firebase.
-// This first saves the image in Firebase storage.
-export function saveImageMessage(file, roomId) {
-  // 1 - We add a message with a loading icon that will get updated with the shared image.
+// Saves a new message containing an image/video in Firebase.
+export function saveMediaMessage(file, roomId) {
+  // 1 - We add a message with a loading icon that will get updated later.
   db.collection('messages')
     .add({
       uid: auth.currentUser.uid,
       displayName: auth.currentUser.displayName,
-      imageUrl: LOADING_IMAGE_URL,
+      mediaUrl: LOADING_IMAGE_URL,
+      type: 'loading',
       photoURL: auth.currentUser.photoURL,
       roomId: roomId,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(function (messageRef) {
-      // 2 - Upload the image to Cloud Storage.
+      // 2 - Upload the image/video to Cloud Storage.
       var filePath = roomId + '/' + file.name;
       return firebase
         .storage()
@@ -194,9 +194,10 @@ export function saveImageMessage(file, roomId) {
         .then(function (fileSnapshot) {
           // 3 - Generate a public URL for the file.
           return fileSnapshot.ref.getDownloadURL().then((url) => {
-            // 4 - Update the chat message placeholder with the image's URL.
+            // 4 - Update the chat message placeholder with the media URL.
             return messageRef.update({
-              imageUrl: url,
+              mediaUrl: url,
+              type: file.type.split('/')[0],
               storageUri: fileSnapshot.metadata.fullPath,
             });
           });
@@ -217,7 +218,8 @@ export const fetchListImageInRoom = (roomId) => {
   return listRef
     .listAll()
     .then((res) => {
-      const urlsPromise = res.items.map((itemRef) => itemRef.getDownloadURL());
+      console.log(res.items);
+      const urlsPromise = res.items.map((itemRef) => console.log(itemRef));
       return Promise.all(urlsPromise);
     })
     .catch((error) => {

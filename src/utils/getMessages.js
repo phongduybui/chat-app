@@ -8,3 +8,11 @@ export function getLinkMessages(messages = []) {
     return textContent.match(regexURL);
   });
 }
+
+export function getVideoMessages(messages = []) {
+  return messages.filter((message) => message.type === 'video');
+}
+
+export function getImageMessages(messages = []) {
+  return messages.filter((message) => message.type === 'image');
+}

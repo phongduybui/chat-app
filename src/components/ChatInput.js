@@ -3,7 +3,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { MdAttachFile, MdTagFaces } from 'react-icons/md';
 import { IoPaperPlane } from 'react-icons/io5';
-import { addDocument, saveImageMessage } from '../firebase/services';
+import { addDocument, saveMediaMessage } from '../firebase/services';
 import { toast } from 'react-toastify';
 
 const ChatInput = ({ userInfo, roomId }) => {
@@ -40,13 +40,14 @@ const ChatInput = ({ userInfo, roomId }) => {
 
   const handleUploadFile = (e) => {
     const file = e.target.files[0];
-    const isImage = file.type.match('image.*');
+    const fileType = file.type;
+    const isValidFile = fileType.match('image.*') || fileType.match('video.*');
 
-    if (!isImage) {
-      toast.warn('❗You can only share images!');
+    if (!isValidFile) {
+      toast.warn('❗You can only share image or video!');
       return;
     }
-    saveImageMessage(file, roomId);
+    saveMediaMessage(file, roomId);
   };
 
   useEffect(() => {

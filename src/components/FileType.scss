@@ -84,4 +84,13 @@
       font-size: 12px;
     }
   }
+
+  .room-video {
+    display: block;
+    max-width: 270px;
+    min-height: 150px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-border);
+  }
 }
