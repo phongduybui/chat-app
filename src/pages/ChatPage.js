@@ -14,7 +14,12 @@ import {
   setRooms,
   setSelectedRoom,
 } from '../redux/slices/roomSlice';
-import { AiFillFile, AiFillPicture, AiFillPlaySquare } from 'react-icons/ai';
+import {
+  AiFillFile,
+  AiFillPicture,
+  AiFillPlaySquare,
+  AiOutlineLink,
+} from 'react-icons/ai';
 import { BiMessageAdd, BiDotsVerticalRounded } from 'react-icons/bi';
 import { BsFillFolderSymlinkFill, BsFillFolderFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +30,7 @@ import clsx from 'clsx';
 import { setChatScreenMobile } from '../redux/slices/chatScreenSlice';
 import { FiChevronLeft } from 'react-icons/fi';
 import MemberItem from '../components/MemberItem';
+import { getLinkMessages } from '../utils/getLinkMessages';
 
 const ChatPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -37,6 +43,7 @@ const ChatPage = ({ match }) => {
     (state) => state.rooms
   );
   const { screen } = useSelector((state) => state.chatScreen);
+  const linkMessages = getLinkMessages(messages);
 
   useEffect(() => {
     let collectionRef = db.collection('rooms').orderBy('createdAt');
@@ -181,7 +188,7 @@ const ChatPage = ({ match }) => {
             <BsFillFolderSymlinkFill />
             <div className='type__info'>
               <span className='type__title'>All links</span>
-              <span className='type__qty'>0</span>
+              <span className='type__qty'>{linkMessages.length}</span>
             </div>
           </div>
         </div>
@@ -211,11 +218,27 @@ const ChatPage = ({ match }) => {
             ))}
           </FileType>
           <FileType
-            type='Documents'
+            type='Links'
             Icon={<AiFillFile />}
-            qty={0}
+            qty={linkMessages.length}
             color='#5AB0BA'
-          />
+          >
+            {linkMessages.map((linkMessage) => (
+              <div className='room-link-container' key={linkMessage?.id}>
+                <span>
+                  <AiOutlineLink />
+                </span>
+                <a
+                  href={linkMessage?.text}
+                  target='_blank'
+                  rel='noreferrer'
+                  className='room-link'
+                >
+                  {linkMessage?.text}
+                </a>
+              </div>
+            ))}
+          </FileType>
           <FileType
             type='Videos'
             Icon={<AiFillPlaySquare />}

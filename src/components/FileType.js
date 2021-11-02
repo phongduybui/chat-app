@@ -25,7 +25,9 @@ const FileType = ({ Icon, type, qty, color, children }) => {
           </div>
           <div className='FileType__wrapper'>
             <span className='FileType__type text-primary'>{type}</span>
-            <p className='FileType__info text-secondary'>{`${qty} files`}</p>
+            <p className='FileType__info text-secondary'>{`${qty} ${
+              type === 'Links' ? 'links' : 'files'
+            }`}</p>
           </div>
         </div>
       }

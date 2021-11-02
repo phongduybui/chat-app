@@ -58,4 +58,30 @@
     border-radius: 2px;
     margin: 6px;
   }
+
+  .room-link-container {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    padding-left: 4px;
+    @include textOverflow;
+    span {
+      cursor: pointer;
+      padding: 8px;
+      margin-right: 8px;
+      border-radius: 6px;
+      background-color: var(--gray-background-color);
+      @include flexCenter();
+    }
+    margin-bottom: 8px;
+  }
+
+  .room-link {
+    color: var(--text-color);
+    font-size: 13px;
+    @include textOverflow;
+    @include breakpointDown($md) {
+      font-size: 12px;
+    }
+  }
 }
