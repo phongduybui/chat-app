@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { auth } from '../../firebase/config';
 import { addDocument, generateKeywords } from '../../firebase/services';
+import { resetScreens } from './chatScreenSlice';
+import { resetMessages } from './messageSlice';
+import { resetRoomModal } from './roomModalSlice';
+import { resetRoom } from './roomSlice';
 
 const initialState = { userInfo: null };
 
@@ -45,7 +49,7 @@ export const userSlice = createSlice({
         return { payload: user };
       },
     },
-    signOutAction: () => {
+    resetUser: () => {
       return initialState;
     },
   },
@@ -65,6 +69,14 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { signInAction, signOutAction } = userSlice.actions;
+export const { signInAction, resetUser } = userSlice.actions;
+
+export const signOutAction = () => async (dispatch) => {
+  dispatch(resetUser());
+  dispatch(resetScreens());
+  dispatch(resetRoomModal());
+  dispatch(resetMessages());
+  dispatch(resetRoom());
+};
 
 export default userSlice.reducer;

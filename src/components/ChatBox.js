@@ -33,22 +33,22 @@ const ChatBox = () => {
   };
 
   useEffect(() => {
-    let collectionRef = db.collection('messages').orderBy('createdAt');
     if (match.params.roomId) {
+      let collectionRef = db.collection('messages').orderBy('createdAt');
       collectionRef = collectionRef.where('roomId', '==', match.params.roomId);
-    }
-    const unsubscribe = collectionRef.onSnapshot((snapshot) => {
-      const messages = snapshot.docs.map((doc) => {
-        return {
-          ...doc.data(),
-          id: doc.id,
-        };
+      const unsubscribe = collectionRef.onSnapshot((snapshot) => {
+        const messages = snapshot.docs.map((doc) => {
+          return {
+            ...doc.data(),
+            id: doc.id,
+          };
+        });
+
+        dispatch(setMessages(messages));
       });
 
-      dispatch(setMessages(messages));
-    });
-
-    return unsubscribe;
+      return unsubscribe;
+    }
   }, [dispatch, match.params.roomId]);
 
   useEffect(() => {

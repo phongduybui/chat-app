@@ -47,6 +47,9 @@ export const roomSlice = createSlice({
         return { payload: selectedRoom };
       },
     },
+    resetRoom: () => {
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMembersInRoom.fulfilled, (state, action) => {
@@ -66,6 +69,6 @@ export const roomSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setRooms, setSelectedRoom } = roomSlice.actions;
+export const { setRooms, setSelectedRoom, resetRoom } = roomSlice.actions;
 
 export default roomSlice.reducer;

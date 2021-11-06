@@ -18,10 +18,13 @@ export const chatScreenSlice = createSlice({
         return { payload: screen };
       },
     },
+    resetScreens: () => {
+      return initialState;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setChatScreenMobile } = chatScreenSlice.actions;
+export const { setChatScreenMobile, resetScreens } = chatScreenSlice.actions;
 
 export default chatScreenSlice.reducer;

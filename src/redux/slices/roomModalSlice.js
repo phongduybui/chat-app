@@ -14,10 +14,13 @@ export const roomModalSlice = createSlice({
         return { payload: isVisible };
       },
     },
+    resetRoomModal: () => {
+      return initialState;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setRoomModalVisible } = roomModalSlice.actions;
+export const { setRoomModalVisible, resetRoomModal } = roomModalSlice.actions;
 
 export default roomModalSlice.reducer;

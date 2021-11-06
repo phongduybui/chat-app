@@ -16,10 +16,13 @@ export const messageSlice = createSlice({
         return { payload: messages };
       },
     },
+    resetMessages: () => {
+      return initialState;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setMessages } = messageSlice.actions;
+export const { setMessages, resetMessages } = messageSlice.actions;
 
 export default messageSlice.reducer;
