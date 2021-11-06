@@ -85,7 +85,7 @@
 
     & .CollapsibleBar__content {
       // Trick for show child div scrollable (css apply to parent)
-      overflow: auto;
+      // overflow: auto;
       display: flex;
       flex-direction: column;
     }
